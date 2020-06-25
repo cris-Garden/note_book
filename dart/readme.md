@@ -1,3 +1,5 @@
+[toc]
+
 # 语法
 
 ## String
@@ -814,12 +816,3 @@ class BlocModel{
 }
 
 ```
-
-
-
-
-
-
-
-
-
