@@ -1,4 +1,16 @@
-# Tips
+- [config 配置指令](#config-配置指令)
+  - [查看系统config](#查看系统config)
+  - [查看当前用户（global）配置](#查看当前用户global配置)
+  - [查看当前仓库配置信息](#查看当前仓库配置信息)
+- [修改commit 的注释](#修改commit-的注释)
+  - [修改最近一次](#修改最近一次)
+  - [修改过去的](#修改过去的)
+- [指定的提交向其他的分支marge](#指定的提交向其他的分支marge)
+- [指定的多个commit向某个分支去合](#指定的多个commit向某个分支去合)
+- [恢复误删的分支](#恢复误删的分支)
+- [Xcode里Pod工程不自动提示解决方案](#xcode里pod工程不自动提示解决方案)
+- [iOS工程配置git忽略文件(.gitignore)](#ios工程配置git忽略文件gitignore)
+  - [.gitignore无效解决办法](#gitignore无效解决办法)
 
 ## config 配置指令
 
@@ -78,7 +90,7 @@ git commit --amend
    git rebase --continue
 ```
 
-## 指しているコミットを他のブランチにマージ
+## 指定的提交向其他的分支marge
 
 コミット62ecb3をブランチmasterにマージする
 
@@ -90,7 +102,7 @@ git cherry-pick 62ecb3
 
 
 
-## 指定のコミットグルプを他のブランチにマージ
+## 指定的多个commit向某个分支去合
 
 例：commit76cada ~62ecb3 をmaster にマージする
 
@@ -100,13 +112,26 @@ git cherry-pick 62ecb3
 git checkout -b newbranch 62ecb3
 ```
 
-## Pod工程不提示
+## 恢复误删的分支
+
+```
+// 获取所有的提交日志
+git log -g   
+或者
+git log -a
+
+//以commitid新建一个branch
+git branch new_branch 499b281aa9ed8001cd17ded2fb04cda81ee5a6ae  // 新建分支名字(new_branch_name)
+
+```
+
+## Xcode里Pod工程不自动提示解决方案
 
 File-->Workspace Settings -->Legacy Build System
 
 
 
-## iOS工程配置git忽略文件(.gitignore) .gitignore无效解决办法
+## iOS工程配置git忽略文件(.gitignore) 
 
 .gitignore
 
@@ -182,7 +207,9 @@ iOSInjectionProject/
 
 **到这里，就创建好了".gitignore"文件了！！**
 
-**创建完以后发现未生效，因为.gitignore只能忽略那些原来没有被追踪的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的**
+### .gitignore无效解决办法
+
+>创建完以后发现未生效，因为.gitignore只能忽略那些原来没有被追踪的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的
 
 gitignore规则不生效的解决办法，先把本地缓存删除然后更新
 
