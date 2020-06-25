@@ -2843,29 +2843,3 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 ```
-
-
-
-[share](https://stackoverflow.com/a/45364350)[improve this answer](https://stackoverflow.com/posts/45364350/edit)
-
-answered Jul 28 '17 at 3:23
-
-[![img](https://www.gravatar.com/avatar/03edd77079e1c7331ef68cc6921cce0b?s=32&d=identicon&r=PG)](https://stackoverflow.com/users/911289/german-saprykin)
-
-[German Saprykin](https://stackoverflow.com/users/911289/german-saprykin)
-
-**2,200**1717 silver badges2020 bronze badges
-
-
-
-- 1
-
-  error: property 'urlChannel' not found on object of type 'AppDelegate *' self.urlChannel = [FlutterMethodChannel methodChannelWithName:@"com.myproject/url" binaryMessenger:controller]; – [bastimm](https://stackoverflow.com/users/1539857/bastimm) [Jan 31 at 15:33](https://stackoverflow.com/questions/45361624/flutter-io-is-it-possible-to-deep-link-to-android-and-ios-in-flutter#comment95736123_45364350)
-
-- 
-
-  This is the only place I have been able to find simple code to use for this task!.Thank you. – [davaus](https://stackoverflow.com/users/1722805/davaus) [Sep 17 at 23:12](https://stackoverflow.com/questions/45361624/flutter-io-is-it-possible-to-deep-link-to-android-and-ios-in-flutter#comment102375225_45364350)
-
-
-
-For anyone need updated solution: you can use **Google Dynamic Links for Firebase** and another guideline on [**Medium**](https://medium.com/@diegoveloper/flutter-firebase-dynamic-link-6f1b79278ce0)

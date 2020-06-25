@@ -54,7 +54,6 @@ class Point {
     this.y = y;
   }
 }
-复制代码
 ```
 
 上例中只有两个成员变量，如果有10个，岂不是麻烦死？所以Dart有语法糖给你哦：
@@ -67,7 +66,6 @@ class Point {
   // before the constructor body runs.
   Point(this.x, this.y);
 }
-复制代码
 ```
 
 它可以将x,y的赋值变得简单一些，就不用写构造函数的方法体了，记得括号后用分号哦。
@@ -87,7 +85,6 @@ class Point {
   }
 }
 
-复制代码
 ```
 
 请记住，命名构造函数不可继承，如果子类想要有 和父类一样的命名构造函数，那就写个同名的（通常也会在子类的命名构造函数里，调用父类的同名命名构造函数）
@@ -137,7 +134,6 @@ main() {
   // in Person
   // in Employee
 }
-复制代码
 ```
 
 初始化列表就是构造函数名的冒号后面，打括号前面的部分。
@@ -177,7 +173,6 @@ main() {
   var p = new Point(2, 3);
   print(p.distanceFromOrigin);
 }
-复制代码
 ```
 
 #### 6. 构造函数传递
@@ -194,7 +189,6 @@ class Point {
   // Delegates to the main constructor.
   Point.alongXAxis(num x) : this(x, 0);
 }
-复制代码
 ```
 
 传递构造函数，没有方法体，会在初始化列表中，调用另一个构造函数。
@@ -210,7 +204,6 @@ class ImmutablePoint {
 
   const ImmutablePoint(this.x, this.y);
 }
-复制代码
 ```
 
 如果你的类，创建的对象永远不会改变，你可以在编译期就创建这个常量实例，并且定义一个常量构造函数，并且确保所有的成员变量都是final的。
@@ -250,17 +243,11 @@ main() {
     var logger = Logger('UI');
     logger.log('Button clicked');
 }
-复制代码
 ```
 
 > 工厂构造函数，没有权利访问this
 
-上例的意思是，类中又一个静态缓存`_cache`保存着一些Logger类实例，创建实例时，给工厂构造函数传递的name，如果在缓存中已经存在，就用缓存中现成的实例，如果没有，就新建一个实例，并且也放到缓存中。
+上例的意思是，类中有一个静态缓存`_cache`保存着一些Logger类实例，创建实例时，给工厂构造函数传递的name，如果在缓存中已经存在，就用缓存中现成的实例，如果没有，就新建一个实例，并且也放到缓存中。
 
 如此这般，我们可以创建名字为UI / SYS / API 等的实例，然后在debug的时候，如果设置名字为UI的Logger实例的mute为true，就不会打印UI相关的log，而不影响其它两个名字的log。是不是很方便呢？
 
-
-作者：Realank Liu
-链接：https://juejin.im/post/5d3fda64e51d4561cc25efa5
-来源：掘金
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
