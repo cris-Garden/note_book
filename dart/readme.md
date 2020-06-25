@@ -1,10 +1,37 @@
-[toc]
+- [String](#string)
+  - [自带方法](#自带方法)
+- [Map](#map)
+  - [直接初始化Map](#直接初始化map)
+  - [限定类型](#限定类型)
+  - [从一个map初始化](#从一个map初始化)
+  - [更新数据](#更新数据)
+  - [添加数据](#添加数据)
+    - [addEntries方式添加](#addentries方式添加)
+    - [添加另一个map内容](#添加另一个map内容)
+    - [添加已经存在元素](#添加已经存在元素)
+  - [删除数据](#删除数据)
+  - [清楚所有数据](#清楚所有数据)
+  - [遍历所有元素](#遍历所有元素)
+- [List](#list)
+  - [**初始化List**](#初始化list)
+  - [**常用字段**](#常用字段)
+  - [**添加数据**](#添加数据-1)
+  - [**删除数据**](#删除数据-1)
+  - [**修改数据**](#修改数据)
+  - [**查询操作**](#查询操作)
+  - [其他操作](#其他操作)
+- [关键字](#关键字)
+  - [Dynamic 关键字](#dynamic-关键字)
+- [类](#类)
+  - [构造函数](#构造函数)
+    - [内部构造函数（单例）](#内部构造函数单例)
+    - [重定向构造函数](#重定向构造函数)
+- [随机数和计时器](#随机数和计时器)
+- [Bloc和Stream](#bloc和stream)
+  - [用Stream自动生成数字和计算和](#用stream自动生成数字和计算和)
+# String
 
-# 语法
-
-## String
-
-### 自带方法
+## 自带方法
 
 - contains(var)：判断字符串是否包含var
 - subString()：字符串截取
@@ -21,9 +48,9 @@
 
 
 
-## Map
+# Map
 
-### 直接初始化Map
+## 直接初始化Map
 
 ```dart
 Map map = Map();
@@ -32,7 +59,7 @@ Map map = {1:"abc","abc":"abc","ddd":11};
 
 这里的map不指定任何类型，这时map中K-V的类型均是dynamic
 
-### 限定类型
+## 限定类型
 
 ```dart
 Map map = Map<int,String>();
@@ -41,7 +68,7 @@ Map map = Map<String,Widget>();
 Map<String,String> map = {'title': 'search', 'path': '/search'};
 ```
 
-### 从一个map初始化
+## 从一个map初始化
 
 ```dart
 Map map = {1:"abc","abc":"abc","ddd":11,"ccc":11,"ff":"ff"};
@@ -66,7 +93,7 @@ I/flutter ( 8530): {new1: newabc, newabc: newabc, newddd: new11, newccc: new11, 
 I/flutter ( 8530): {new21: new2abc, new2abc: new2abc, new2ddd: new211, new2ccc: new211, new2ff: new2ff}
 ```
 
-### 更新数据
+## 更新数据
 
 ```dart
 Map map = {"aaa":"1","bbb":"2","ccc":11};
@@ -83,9 +110,9 @@ print(map);//{aaa: aaa, bbb: bbb, ccc: ccc, ddd: ddd}
 
 
 
-### 添加数据
+## 添加数据
 
-#### addEntries方式添加
+### addEntries方式添加
 
 ```dart
 Map<String,String> map = {"title":"aa","context":"cc"};
@@ -96,7 +123,7 @@ Iterable listIterable = list.reversed;
 map.addEntries(listIterable);
 ```
 
-#### 添加另一个map内容
+### 添加另一个map内容
 
 ```
 Map<String,String> map = {"title":"aa","context":"cc"};
@@ -104,7 +131,7 @@ Map<String,String> map1 = {"password":"aa","area":"cc"};
 map.addAll(map1);
 ```
 
-#### 添加已经存在元素
+### 添加已经存在元素
 
 ```dart
 Map map = {1:"abc","abc":"abc","ddd":11,"ccc":11,"ff":"ff"};
@@ -135,7 +162,7 @@ for (var key in ['Bob', 'Rohan', 'Sophena']) {
 
 ```
 
-### 删除数据
+## 删除数据
 
 ```dart
 Map map = {1:"abc","abc":"abc","ddd":11,"ccc":11,"ff":"ff"};
@@ -146,13 +173,13 @@ print(map);//{abc: abc, ff: ff}
 
 ```
 
-### 清楚所有数据
+## 清楚所有数据
 
 ```dart
 map.clear();
 ```
 
-### 遍历所有元素
+## 遍历所有元素
 
 ```dart
 map.forEach((key,value) => 
@@ -166,9 +193,9 @@ map.forEach((key,value) => print("$key : $value"));
 
 
 
-## List
+# List
 
-### **初始化List**
+## **初始化List**
 
 ```dart
 //非固定长度list
@@ -193,7 +220,7 @@ map.forEach((key,value) => print("$key : $value"));
   testList5.add(1.6);//可以添加
 ```
 
-### **常用字段**
+## **常用字段**
 
 ```dart
 var testList6 = [1,"2",3,34532,555];
@@ -211,7 +238,7 @@ var testList6 = [1,"2",3,34532,555];
 
 ```
 
-### **添加数据**
+## **添加数据**
 
 ```dart
  //添加数据
@@ -254,7 +281,7 @@ var testList6 = [1,"2",3,34532,555];
   print("testFollowedBy ${testFollowedBy}");
 ```
 
-### **删除数据**
+## **删除数据**
 
 ```dart
 //删除指定元素
@@ -274,7 +301,7 @@ var testList6 = [1,"2",3,34532,555];
   print("删除列表中toString后长度为3的元素：==> $testList6");
 ```
 
-### **修改数据**
+## **修改数据**
 
 ```dart
 //设置元素，下面的方法将testList6中的第一个和第二个元素设置为testList中的元素
@@ -306,7 +333,7 @@ var testList6 = [1,"2",3,34532,555];
   //如果第一个参数+第二个参数.length大于要修改的list的length会报错
 ```
 
-### **查询操作** 
+## **查询操作** 
 
 ```dart
 //截取一个List中的其中几个元素，第一个参数表示开始的位置，第二个参数为可选参数，表示结束的位置
@@ -444,7 +471,7 @@ var testList6 = [1,"2",3,34532,555];
 
 ```
 
-### 其他操作
+## 其他操作
 
 ```
 print(testList6);
@@ -610,7 +637,7 @@ class Dog extends Animal {
 
 ```
 
-## 内部构造函数（单例）
+### 内部构造函数（单例）
 
 如果一个类有且只有一个内部构造函数那么他就不能在类的外部被实例化
 
@@ -636,7 +663,7 @@ class Singleton {
 }
 ```
 
-## 重定向构造函数
+### 重定向构造函数
 
 有时候构造函数的目的只是重定向到该类（用this）的另一个构造函数。重定向构造函数没有函数体，使用冒号`:`分隔。
 
@@ -686,7 +713,7 @@ time:5,number:8
 
 从输出结果可以看出定时启动之后也是异步的。
 
-# Bloc
+# Bloc和Stream
 
 一个最简单的bloc例子，通过StreamController传入输入内容，设置数据输入输出的处理回调(这里通过回调的sink的.add方法来设置返回值,addError返回错误值). controller.stream.transform(transformer).listen方法来来绑定处理回调和坚挺输出。
 
