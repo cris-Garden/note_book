@@ -14,3 +14,6 @@
 # 设计网站
 [输入文字即可生产logo](https://www.logaster.cn)
 
+# 安卓
+[android studio 快捷键](https://developer.android.com/studio/intro/keyboard-shortcuts?hl=zh-cn)
+
