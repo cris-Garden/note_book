@@ -17,3 +17,7 @@
 # 安卓
 [android studio 快捷键](https://developer.android.com/studio/intro/keyboard-shortcuts?hl=zh-cn)
 
+# PYTHON
+
+[如何在mac里面布置python环境](https://basicincome30.com/python-install-mac)
+
