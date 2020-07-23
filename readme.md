@@ -21,3 +21,11 @@
 
 [如何在mac里面布置python环境](https://basicincome30.com/python-install-mac)
 
+# Mysql
+
+[sql笔记](./Mysql/sql.md)
+
+
+# eclips
+
+[eclips tips](eclipse.md)
