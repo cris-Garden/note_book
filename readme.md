@@ -29,3 +29,7 @@
 # eclips
 
 [eclips tips](eclipse.md)
+
+# mybatis
+
+[mybatis](mybatis.md)
