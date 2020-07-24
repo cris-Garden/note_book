@@ -12,6 +12,7 @@
   - [代码行上移](#代码行上移)
   - [代码行下移](#代码行下移)
   - [删除当前行](#删除当前行)
+  - [显示类名全路径](#显示类名全路径)
 # project Explorer不显示work set
 
 通过project Explorer界面的右上角找到Select Working Set，选中想要显示的workset即可
@@ -90,4 +91,10 @@ keys -> move lines down
 ## 删除当前行
 
 keys -> Delete line
+
+## 显示类名全路径
+
+keys -> copy Qualified Name
+
+选中文件拷贝的是全路径。选中Java文件内部的类名拷贝的是包名。
 
