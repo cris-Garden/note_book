@@ -709,6 +709,7 @@ P名称空间的使用
 SpEL：Spring Expression Language，Spring的表达式语言。
 
 语法：`#{SpEL}`
+详情[参考](heima/spring/01.入门与常用配置/Spring_表达式语言.pdf)
 
 使用
 ```xml
