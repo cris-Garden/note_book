@@ -1,4 +1,6 @@
+- [Eclipse下载](#eclipse下载)
 - [project Explorer不显示work set](#project-explorer不显示work-set)
+- [Tomcat配置](#tomcat配置)
 - [如何干净的删除包](#如何干净的删除包)
 - [运行前保存所有文件](#运行前保存所有文件)
 - [自动补全配置](#自动补全配置)
@@ -13,9 +15,34 @@
   - [代码行下移](#代码行下移)
   - [删除当前行](#删除当前行)
   - [显示类名全路径](#显示类名全路径)
+
+
+# Eclipse下载
+
+https://www.eclipse.org/downloads/packages/
+
+java ee:可以创建项目web工程。
+
 # project Explorer不显示work set
 
 通过project Explorer界面的右上角找到Select Working Set，选中想要显示的workset即可
+
+# Tomcat配置
+1. 打开Eclipse，单击“Window”菜单，选择下方的“Preferences”。 
+![eclipse](image/eclipse1.jpg)
+2. 单击“Server”选项，选择下方的“Runtime Environments”。 
+![eclipse](image/eclipse2.jpg)
+3. 点击“Add”添加Tomcat。
+![eclipse](image/eclipse3.png)
+4. 点击“Next”，选中自己安装的Tomcat路径。
+![eclipse](image/eclipse4.jpg)
+5. 点击“Finish”完成。 
+![eclipse](image/eclipse5.png)
+6. 完成之后将出现以下界面(如果没有出现可以点击Window->Show View->Servers进行显示)
+![eclipse](image/eclipse6.png)
+7. 双击控制台蓝色的链接
+![eclipse](image/eclipse8.png)
+8. 点击"Finish"之后,这样我们的Tomcat服务器就已经配置好了。
 
 # 如何干净的删除包
 

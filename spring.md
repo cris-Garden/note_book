@@ -1,4 +1,36 @@
 
+- [Spring](#spring)
+  - [struts2拦截器概念](#struts2拦截器概念)
+  - [Spring：SE/EE开发的一站式框架。](#springseee开发的一站式框架)
+  - [SrpingIOC入门](#srpingioc入门)
+    - [Spring开发包](#spring开发包)
+    - [web入门工程](#web入门工程)
+      - [引入web四个核心包，](#引入web四个核心包)
+      - [引入spring的依赖库](#引入spring的依赖库)
+      - [创建接口和实现类](#创建接口和实现类)
+      - [将接口和实现类交个spring管理](#将接口和实现类交个spring管理)
+      - [测试代码](#测试代码)
+    - [IOC和DI](#ioc和di)
+  - [BeanFactory：老版本的工厂类和ApplicationContext	：新版本的工厂类](#beanfactory老版本的工厂类和applicationcontext新版本的工厂类)
+    - [ApplicationContext有两个实现类](#applicationcontext有两个实现类)
+  - [XML提示配置](#xml提示配置)
+    - [什么DTD](#什么dtd)
+      - [内部的 DOCTYPE 声明](#内部的-doctype-声明)
+      - [外部文档声明](#外部文档声明)
+    - [为什么使用 DTD？](#为什么使用-dtd)
+    - [什么是schema](#什么是schema)
+  - [Bean的相关配置](#bean的相关配置)
+    - [Bean属性](#bean属性)
+      - [实例相关](#实例相关)
+      - [生命周期配置](#生命周期配置)
+      - [Bean的作用范围的配置（重点）](#bean的作用范围的配置重点)
+  - [spring的Bean管理(xml方式)](#spring的bean管理xml方式)
+    - [Bean的属性注入（依赖注入）方式](#bean的属性注入依赖注入方式)
+      - [构造方法的方式的属性注入](#构造方法的方式的属性注入)
+      - [Set方法的方式的属性注入](#set方法的方式的属性注入)
+        - [Set方法的基本类型属性注入](#set方法的基本类型属性注入)
+        - [Set方法设置对象类型的属性](#set方法设置对象类型的属性)
+      - [p名称空间注入（Spring2.5以后）](#p名称空间注入spring25以后)
 - [tips](#tips)
   - [Spring概述（10）](#spring概述10)
     - [什么是spring?](#什么是spring)
@@ -91,7 +123,596 @@
     - [有几种不同类型的自动代理？](#有几种不同类型的自动代理)
 
 
+# Spring
 
+## struts2拦截器概念
+
+拦截器：拦截对Action的访问，拦截到Action的具体的方法。
+
+struts2的执行流程：请求-核心过滤器创建ActionProxy，调用proxy.execute方法。在这个内部ActionInvocation.invoke()在这个方法内部，递归执行一组拦截器ActionResult拦截器后面的代码
+
+
+
+## Spring：SE/EE开发的一站式框架。
+一站式框架：有EE开发的每一层解决方案。
+* WEB层		：SpringMVC
+* Service层	：Spring的Bean管理，Spring声明式事务 （Bean管理）
+* DAO层		：Spring的Jdbc模板，Spring的ORM模块 
+
+
+## SrpingIOC入门
+
+* IOC: Inversion of Control(控制反转)。
+* 控制反转：将对象的创建权反转给（交给）Spring。
+
+SpringIOC是通过工厂+放射+配置文件的方式解决接口和工厂的耦合。
+
+![spring7](image/spring7.png)
+
+
+### Spring开发包
+
+官网：http://spring.io/
+
+*	docs		：Spring的开发规范和API
+*	libs		：Spring的开发的jar和源码（也是jar包的方式存放）
+*	schema	：Spring的配置文件的约束
+
+### web入门工程
+
+#### 引入web四个核心包，
+![srping](image/spring5.png)
+
+* spring-beans-4.2.4.RELEASE.jar
+* spring-context-4.2.4.RELEASE.jar
+* spring-core-4.2.4.RELEASE.jar
+* spring-expression-4.2.4.RELEASE.jar
+
+#### 引入spring的依赖库
+![srping](image/spring6.png)
+
+* com.springsource.org.apache.commons.logging-1.1.1.jar：apache的接口输出日志，由于依赖于log4j所以还要必须引入log4j
+* com.springsource.org.apache.log4j-1.2.15.jar:log4j
+
+#### 创建接口和实现类
+
+```java
+/**
+ * 用户管理DAO层接口
+ * @author jt
+ *
+ */
+public interface UserDAO {
+	public void save();
+}
+```
+
+```java
+public class UserDAOHibernateImpl implements UserDAO {
+
+	@Override
+	public void save() {
+		System.out.println("UserDAOHibernateImpl执行了...");
+	}
+
+}
+```
+```java
+/**
+ * 用户管理DAO层实现类
+ * @author jt
+ *
+ */
+public class UserDAOImpl implements UserDAO {
+	private String name;
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public void save() {
+		System.out.println("UserDAOImpl执行了..."+name);
+	}
+
+}
+```
+
+#### 将接口和实现类交个spring管理
+
+配置applicationContext.xml文件。
+
+bean的schema可以在spring的解压路径下spring-framework-4.2.4.RELEASE\docs\spring-framework-reference\html\xsd-configuration.html里找到
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- Spring的入门的配置==================== -->
+	<bean name="userDao" class="com.itheima.spring.demo1.UserDAOImpl">
+	</bean>
+	
+</beans>
+```
+
+#### 测试代码
+ 
+```java
+    @Test
+	/**
+	 * 传统方式的调用
+	 */
+	public void demo1(){
+		UserDAOImpl userDAO = new UserDAOImpl();
+		userDAO.save();
+	}
+
+    @Test
+	/**
+	 * Spring的方式的调用
+	 */
+	public void demo2(){
+		// 创建Spring的工厂
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+		UserDAO userDAO = (UserDAO) applicationContext.getBean("userDao");
+		userDAO.save();
+	}
+```
+
+总结：如果需要更换实现只需要把com.itheima.spring.demo1.UserDAOImpl换成com.itheima.spring.demo1.UserDAOHibernateImpl即可。不需要改动任何的源代码。
+
+
+### IOC和DI
+*	IOC：控制反转，将对象的创建权反转给了Spring。
+*	DI：依赖注入，前提必须有IOC的环境，Spring管理这个类的时候将类的依赖的属性注入（设置）进来。
+
+一定要区分好IOC和DI的区别。一个是类交给spring管理，一个是属性的注入。
+
+改造applicationContext.xml的bean配置。在注入实现类的同时注入依赖。注意细节依赖注入是判断注入类是否有set方法来决定的。
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- Spring的入门的配置==================== -->
+	<bean name="userDao" class="com.itheima.spring.demo1.UserDAOImpl">
+		<property name="name" value="王东"></property>
+	</bean>
+
+</beans>
+
+```
+
+测试代码
+```java
+    @Test
+	/**
+	 * Spring的方式的调用
+	 */
+	public void demo2(){
+		// 创建Spring的工厂
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+		UserDAO userDAO = (UserDAO) applicationContext.getBean("userDao");
+		userDAO.save();
+	}   
+```
+输出结果：UserDAOImpl执行了...王东
+
+## BeanFactory：老版本的工厂类和ApplicationContext	：新版本的工厂类
+*	BeanFactory：调用getBean的时候，才会生成类的实例。
+*	ApplicationContext：加载配置文件的时候，就会将Spring管理的类都实例化（scope为单例模式才会实例化）。
+
+### ApplicationContext有两个实现类
+ * ClassPathXmlApplicationContext	：加载类路径下的配置文件
+ * FileSystemXmlApplicationContext	：加载文件系统下的配置文件
+
+一般我们使用第一个，下面是加载系统配置文件的用例。
+
+```java
+    @Test
+	/**
+	 * 加载磁盘上的配置文件
+	 */
+	public void demo3(){
+		ApplicationContext applicationContext = new FileSystemXmlApplicationContext("C:\\applicationContext.xml");
+		UserDAO userDAO = (UserDAO) applicationContext.getBean("userDAO");
+		userDAO.save();
+	}
+```
+
+## XML提示配置
+
+参考：https://www.w3school.com.cn/schema/index.asp
+
+### 什么DTD
+文档类型定义（DTD）可定义合法的XML文档构建模块。它使用一系列合法的元素来定义文档的结构。
+DTD 可被成行地声明于 XML 文档中，也可作为一个外部引用。
+#### 内部的 DOCTYPE 声明
+假如 DTD 被包含在您的 XML 源文件中，它应当通过下面的语法包装在一个 DOCTYPE 声明中：
+```xml
+<!DOCTYPE 根元素 [元素声明]>
+```
+带有 DTD 的 XML 文档实例（请在 IE5 以及更高的版本打开，并选择查看源代码）：
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE note [
+  <!ELEMENT note (to,from,heading,body)>
+  <!ELEMENT to      (#PCDATA)>
+  <!ELEMENT from    (#PCDATA)>
+  <!ELEMENT heading (#PCDATA)>
+  <!ELEMENT body    (#PCDATA)>
+]>
+<note>
+  <to>George</to>
+  <from>John</from>
+  <heading>Reminder</heading>
+  <body>Don't forget the meeting!</body>
+</note>
+```
+在您的浏览器中打开此 XML 文件，并选择“查看源代码”命令。
+
+以上 DTD 解释如下：
+
+* !DOCTYPE note (第二行)定义此文档是 note 类型的文档。
+* !ELEMENT note (第三行)定义 note 元素有四个元素："to、from、heading,、body"
+* !ELEMENT to (第四行)定义 to 元素为 "#PCDATA" 类型
+* !ELEMENT from (第五行)定义 from 元素为 "#PCDATA" 类型
+* !ELEMENT heading (第六行)定义 heading 元素为 "#PCDATA" 类型
+* !ELEMENT body (第七行)定义 body 元素为 "#PCDATA" 类型
+
+#### 外部文档声明
+假如 DTD 位于 XML 源文件的外部，那么它应通过下面的语法被封装在一个 DOCTYPE 定义中：
+```xml
+<!DOCTYPE 根元素 SYSTEM "文件名">
+```
+这个 XML 文档和上面的 XML 文档相同，但是拥有一个外部的 DTD: （在 IE5 中打开，并选择“查看源代码”命令。）
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE note SYSTEM "note.dtd">
+<note>
+<to>George</to>
+<from>John</from>
+<heading>Reminder</heading>
+<body>Don't forget the meeting!</body>
+</note> 
+```
+加载网络DTD用例，这里还可以设置本地指向参考[Eclipse笔记的xml文件自动补全](eclipse.md)
+```xml
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+```
+
+这是包含 DTD 的 "note.dtd" 文件：
+```xml
+<!ELEMENT note (to,from,heading,body)>
+<!ELEMENT to (#PCDATA)>
+<!ELEMENT from (#PCDATA)>
+<!ELEMENT heading (#PCDATA)>
+<!ELEMENT body (#PCDATA)>
+```
+
+### 为什么使用 DTD？
+通过 DTD，您的每一个 XML 文件均可携带一个有关其自身格式的描述。
+通过 DTD，独立的团体可一致地使用某个标准的 DTD 来交换数据。
+而您的应用程序也可使用某个标准的 DTD 来验证从外部接收到的数据。
+您还可以使用 DTD 来验证您自身的数据
+
+### 什么是schema
+
+[参考](https://www.w3school.com.cn/schema/schema_schema.asp)
+
+一个xml可以添加一个DTD，但是可以添加多个schema。
+
+## Bean的相关配置
+
+### Bean属性
+#### 实例相关
+*	id:使用了约束中的唯一约束。里面不能出现特殊字符的。
+*	name:没有使用约束中的唯一约束（理论上可以出现重复的，但是实际开发不能出现的）。里面可以出现特殊字符。
+* class:实例的路径
+#### 生命周期配置
+* init-method		:Bean被初始化的时候执行的方法
+* destroy-method	:Bean被销毁的时候执行的方法（Bean是单例创建，工厂关闭）
+
+java类
+
+```java
+public class CustomerDAOImpl implements CustomerDAO {
+	
+	public void setup(){
+		System.out.println("CustomerDAOImpl被初始化了...");
+	}
+
+	@Override
+	public void save() {
+		System.out.println("CustomerDAOImpl的save方法执行了...");
+	}
+	
+	public void destroy(){
+		System.out.println("CustomerDAOImpl被销毁了...");
+	}
+
+}
+
+```
+
+xml 配置
+
+```xml
+	<!-- Spring的sBean的生命周期的配置=========== -->
+	<bean id="customerDAO" class="com.itheima.spring.demo2.CustomerDAOImpl" scope="prototype" init-method="setup" destroy-method="destroy"/>
+```
+
+
+测试
+```java
+    @Test
+	/**
+	 * 生命周期的配置
+	 */
+	public void demo1(){
+        //第一行被被执行时候bean就会被创建。
+		ClassPathXmlApplicationContext applicationContext= new ClassPathXmlApplicationContext("applicationContext.xml");
+		CustomerDAO customerDAO = (CustomerDAO) applicationContext.getBean("customerDAO");
+		customerDAO.save();
+		applicationContext.close();
+	}
+```
+ApplicationContext接口没有close方法。但是实现类ClassPathXmlApplicationContext实现了close方法。当调用close方法之后会自动调用bean的destory。
+
+#### Bean的作用范围的配置（重点）
+* scope			：Bean的作用范围
+
+scope属性的取值：
+*	singleton		：默认的，Spring会采用单例模式创建这个对象。
+*	prototype	：多例模式。（Struts2和Spring整合一定会用到）
+*	request		：应用在web项目中，Spring创建这个类以后，将这个类存入到request范围中。
+*	session		：应用在web项目中，Spring创建这个类以后，将这个类存入到session范围中。
+*	globalsession	：应用在web项目中，必须在porlet环境下使用。但是如果没有这种环境，相对于session。
+
+>实际开发中singleton和prototype用的比较多。singleton在applicationContext加载配置文件时候就会被初始化。applicationContext.close();不会销毁多例的bean。
+
+## spring的Bean管理(xml方式)
+
+###	Spring的Bean的实例化方式（了解）
+Bean已经都交给Spring管理，Spring创建这些类的时候，有几种方式：
+###	无参构造方法的方式（默认）
+*	编写类
+```java
+/**
+ * 无参数构造方法方式
+ * @author jt
+ *
+ */
+public class Bean1 {
+
+	public Bean1() {
+		super();
+		System.out.println("Bean1的无参数的构造方法执行了...");
+	}
+
+}
+```
+ 
+*	编写配置
+```xml
+<!-- 无参数构造方法 -->
+<bean id="bean1" class="com.itheima.spring.demo3.Bean1"></bean> 
+```
+ 
+###	静态工厂实例化的方式
+*	编写Bean2的静态工厂
+```java
+/**
+ * 静态工厂实例化方式
+ * @author jt
+ *
+ */
+public class Bean2 {
+
+}
+
+/**
+ * Bean2的静态工厂
+ * @author jt
+ *
+ */
+public class Bean2Factory {
+
+	public static Bean2 createBean2(){
+		System.out.println("Bean2Factory中方法执行了...");
+		return new Bean2();
+	}
+}
+
+
+```
+ 
+*	配置
+```xml
+	<!-- 静态工厂实例化 -->
+   <bean id="bean2" class="com.itheima.spring.demo3.Bean2Factory" factory-method="createBean2"/> -->
+	
+```
+ 
+###	实例工厂实例化的方式
+*	Bean3的实例工厂
+```java
+/**
+ * 实例工厂实例化的方式
+ * @author jt
+ *
+ */
+public class Bean3 {
+
+}
+
+/**
+ * Bean3的实例工厂
+ * @author jt
+ *
+ */
+public class Bean3Factory {
+
+	public Bean3 createBean3(){
+		System.out.println("Bean3的实例工厂执行了...");
+		return new Bean3();
+	}
+}
+
+```
+ 
+*	配置
+
+```xml
+	<!-- 实例工厂实例化 -->
+   <bean id="bean3Factory" class="com.itheima.spring.demo3.Bean3Factory"></bean>
+   <bean id="bean3" factory-bean="bean3Factory" factory-method="createBean3"></bean>
+```
+
+### Bean的属性注入（依赖注入）方式
+
+spring只支持构造方法的方式的属性注入和Set方法的方式的属性注入
+
+#### 构造方法的方式的属性注入
+* java类编写
+
+```java
+public class Car {
+	private String name;
+	private Double price;
+	
+	public Car(String name, Double price) {
+		super();
+		this.name = name;
+		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return "Car [name=" + name + ", price=" + price + "]";
+	}
+	
+}
+```
+
+* xml 配置
+```xml
+<bean id="car" class="com.itheima.spring.demo4.Car">
+		<constructor-arg name="name" value="宝马"/>
+		<constructor-arg name="price" value="800000"/>
+</bean>
+	
+```
+
+#### Set方法的方式的属性注入
+
+##### Set方法的基本类型属性注入
+* java类编写
+
+```java
+/**
+ * set方法的属性注入
+ * @author jt
+ *
+ */
+public class Car2 {
+	private String name;
+	private Double price;
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	@Override
+	public String toString() {
+		return "Car2 [name=" + name + ", price=" + price + "]";
+	}
+	
+}
+
+```
+
+* xml 配置
+```xml
+<!-- set方法的方式 -->
+<bean id="car2" class="com.itheima.spring.demo4.Car2">
+		<property name="name" value="奔驰"/>
+		<property name="price" value="1000000"/>
+</bean> 
+```
+
+##### Set方法设置对象类型的属性
+* java类编写
+
+```java
+public class Employee {
+	private String name;
+	private Car2 car2;
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setCar2(Car2 car2) {
+		this.car2 = car2;
+	}
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", car2=" + car2 + "]";
+	}
+}
+```
+
+* xml 配置
+```xml
+    <!-- set方法注入对象类型的属性 -->
+	<bean id="employee" class="com.itheima.spring.demo4.Employee">
+		value:设置普通类型的值，ref:设置其他的类的id或name
+		<property name="name" value="涛哥"/>
+		<property name="car2" ref="car2"/>
+	</bean> 
+```
+>构造方法也支持ref方式注入
+
+#### p名称空间注入（Spring2.5以后）
+
+通过引入p名称空间完成属性的注入：
+写法：
+ * 普通属性	p:属性名=”值”
+ * 对象属性	p:属性名-ref=”值”
+
+P名称空间的引入
+
+![spring8](image/spring8.png)
+
+P名称空间的使用
+
+```xml
+    <!-- 改为p名称空间的方式 -->
+	<bean id="car2" class="com.itheima.spring.demo4.Car2" p:name="奇瑞QQ" p:price="30000"></bean>
+	
+	<bean id="employee" class="com.itheima.spring.demo4.Employee" p:name="王东" p:car2-ref="car2"></bean>
+```
+
+###	SpEL的属性注入（Spring3.0以后）
+
+SpEL：Spring Expression Language，Spring的表达式语言。
+
+语法：`#{SpEL}`
+
+使用
+```xml
+```
 
 
 
