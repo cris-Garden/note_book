@@ -31,6 +31,40 @@
         - [Set方法的基本类型属性注入](#set方法的基本类型属性注入)
         - [Set方法设置对象类型的属性](#set方法设置对象类型的属性)
       - [p名称空间注入（Spring2.5以后）](#p名称空间注入spring25以后)
+    - [复杂集合属性的注入](#复杂集合属性的注入)
+    - [Spring分模块开发](#spring分模块开发)
+  - [Spring阶段实战项目(todo)](#spring阶段实战项目todo)
+  - [注解开发](#注解开发)
+    - [注解开发入门](#注解开发入门)
+      - [引入注解开发包](#引入注解开发包)
+      - [引入spring的配置文件](#引入spring的配置文件)
+      - [开启注解扫描](#开启注解扫描)
+      - [编写相关的类和注解](#编写相关的类和注解)
+      - [编写测试类](#编写测试类)
+    - [Spring中提供@Component 的三个衍生注解:(功能目前来讲是一致的)](#spring中提供component-的三个衍生注解功能目前来讲是一致的)
+    - [属性注入的注解](#属性注入的注解)
+    - [生命周期相关注解](#生命周期相关注解)
+    - [Bean 的作用范围的注解](#bean-的作用范围的注解)
+    - [xml和注解开发的比较](#xml和注解开发的比较)
+  - [AOP开发](#aop开发)
+    - [什么是 AOP](#什么是-aop)
+    - [为什么学习 AOP](#为什么学习-aop)
+    - [Spring的AOP底层实现](#spring的aop底层实现)
+      - [JDK动态代理手动实现](#jdk动态代理手动实现)
+      - [Cglib动态代理手动实现](#cglib动态代理手动实现)
+    - [Spring的基于AspectJ的AOP开发](#spring的基于aspectj的aop开发)
+    - [AOP 的开发中的相关术语:](#aop-的开发中的相关术语)
+    - [AOP开发入门（xml方式）](#aop开发入门xml方式)
+      - [Aop相关jar包](#aop相关jar包)
+      - [引入AOP约束](#引入aop约束)
+      - [创建接口和类:](#创建接口和类)
+      - [目标类的配置](#目标类的配置)
+      - [整合 Junit 单元测试](#整合-junit-单元测试)
+      - [通知类型](#通知类型)
+      - [切入点的表达式](#切入点的表达式)
+      - [编写一个切面类](#编写一个切面类)
+      - [配置完成增强](#配置完成增强)
+      - [其他的增强的配置:](#其他的增强的配置)
 - [tips](#tips)
   - [Spring概述（10）](#spring概述10)
     - [什么是spring?](#什么是spring)
@@ -714,9 +748,545 @@ SpEL：Spring Expression Language，Spring的表达式语言。
 使用
 ```xml
 ```
+### 复杂集合属性的注入
+
+复杂属性的注入分为List，Array(和List一样)，Map，Set.
+
+>Map如何的key和value都可以是类类型的数据。分别使用key-ref和value-ref去引用。
+
+```xml
+<!-- Spring的集合属性的注入============================ -->
+	<!-- 注入数组类型 -->
+	<bean id="collectionBean" class="com.itheima.spring.demo5.CollectionBean">
+		<!-- 数组类型 -->
+		<property name="arrs">
+			<list>
+				<value>王东</value>
+				<value>赵洪</value>
+				<value>李冠希</value>
+			</list>
+		</property>
+		
+		<!-- 注入list集合 -->
+		<property name="list">
+			<list>
+				<value>李兵</value>
+				<value>赵如何</value>
+				<value>邓凤</value>
+			</list>
+		</property>
+		
+		<!-- 注入set集合 -->
+		<property name="set">
+			<set>
+				<value>aaa</value>
+				<value>bbb</value>
+				<value>ccc</value>
+			</set>
+		</property>
+		
+		<!-- 注入Map集合 -->
+		<property name="map">
+			<map>
+				<entry key="aaa" value="111"/>
+				<entry key="bbb" value="222"/>
+				<entry key="ccc" value="333"/>
+			</map>
+		</property>
+	</bean>
+```
+
+### Spring分模块开发
+
+* 加载配置文件时候加载多个
+```java
+ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml","applicationContext2.xml");
+```
+
+* 在一个配置文件中引入多个配置文件
+```xml
+<import resource="applicationContext2.xml"/>	
+```
+
+## Spring阶段实战项目(todo)
 
 
+## 注解开发
 
+### 注解开发入门
+
+#### 引入注解开发包
+![spring9](image/spring9.png)
+
+>Spring4里需要注解开发需要AOP的包，所以在四个核心包之上需要引入额外引入AOP核心包。
+
+#### 引入spring的配置文件
+
+* 引入约束:使用注解开发bean的基本约束之上再引入context约束
+
+![spring10](image/spring10.png)
+
+
+#### 开启注解扫描
+
+```xml
+ <!-- Spring 的注解开发:组件扫描(类上注解: 可以直接使用属性注入的注解) --> 
+ <context:component-scan base-package="com.itheima.spring.demo1"/>
+```
+
+#### 编写相关的类和注解
+
+```java
+public interface UserDao {
+  public void sayHello();
+}
+
+@Component(value="userDao")
+public class UserDaoImpl implements UserDao {
+  @Override
+  public void sayHello() { 
+      System.out.println("Hello Spring...");
+  }
+}
+```
+
+此处的@Component(value="userDao")等同于下面的xml配置
+
+```xml
+
+<bean id="userDao" class="*.*.UserDaoImpl" />
+
+```
+
+#### 编写测试类
+
+```java
+  @Test
+  public void demo2() {
+      ApplicationContext applicationContext = new ClassPathXmlApplicationContext( "applicationContext.xml");
+      UserDao userDao = (UserDao) applicationContext.getBean("userDao"); userDao.sayHello();
+  }
+```
+
+### Spring中提供@Component 的三个衍生注解:(功能目前来讲是一致的)
+* @Controller:WEB 层 
+* @Service:业务层 
+* @Repository:持久层
+
+这三个注解是为了让标注类本身的用途清晰，Spring 在后续版本会对其增强
+
+###  属性注入的注解
+
+使用注解注入的方式,可以不用提供 set 方法.
+
+* @Value :用于注入基本数据类型 .
+* @Autowired :自动装配: 
+   1. 默认按类型进行装配. 
+   2. 按名称注入:xmlIOS开发一般是按名称。
+* @Qualifier:强制使用名称注入. 
+
+```java
+@Service("userService")
+public class UserServiceImpl implements UserService {
+  //注入dao，只有Autowired按类型方式注入。Qualifier一起用就是按名称。userDao是上面UserDaoImpl的@Component(value="userDao")的value一致。
+  @Autowired
+  @Qualifier(value="userDao")
+  private UserDao dao;
+
+  @Override
+  public void save(){
+    dao.save();
+  }
+}
+```
+
+* @Resource 相当于:@Autowired 和@Qualifier 一起使用.
+
+```java
+
+import javax.annotation.Resource;
+
+@Service("userService")
+public class UserServiceImpl implements UserService {
+  
+  @Resource(value="UserDao")
+  private UserDao dao;
+
+  @Override
+  public void save(){
+    dao.save();
+  }
+}
+```
+
+### 生命周期相关注解
+
+
+### Bean 的作用范围的注解
+@Scope:
+* singleton:单例 
+* prototype:多例
+
+```java
+
+@Service("userService")
+@Scope("prototype")
+public class UserServiceImpl implements UserService {
+  ...
+}
+```
+
+
+### xml和注解开发的比较
+
+![spring11](image/spring11.png)
+
+ XML 和注解:
+* XML :结构清晰.
+* 注解 :开发方便.(属性注入.)有些场合用不了，比如这个类不是自己提供。
+
+
+实际开发中还有一种 XML 和注解整合开发:
+* Bean 有 XML 配置.但是使用的属性使用注解注入.
+
+xml和注解整合使用必须配置在没有扫描情况下使用属性注入注解
+```xml
+<!-- 在没有扫描情况下使用属性注入注解：@Resource，@Value，@Autowired，@Qulifer -->
+<context:annotation-config/>
+
+```
+
+## AOP开发
+
+### 什么是 AOP
+
+AOP就是面向切面编程。 解决 OOP 中遇到的一些问题.是 OOP 的延续和扩展.
+
+### 为什么学习 AOP
+
+对程序进行增强:不修改源码的情况下.
+* AOP 可以进行权限校验,日志记录,性能监控,事务控制.
+
+### Spring的AOP底层实现
+
+代理机制:
+Spring 的 AOP 的底层用到两种代理机制:
+* JDK 的动态代理 :针对实现了接口的类产生代理.
+* Cglib 的动态代理 :针对没有实现接口的类产生代理. 应用的是底层的字节码增强的技术 生成当前类
+的子类对象.
+
+#### JDK动态代理手动实现
+
+Java JDK提供的一个动态代理机制不需要第三方框架
+
+```java
+ public class MyJDKProxy implements InvocationHandler {
+    private UserDao userDao;
+    public MyJDKProxy(UserDao userDao) { 
+      this.userDao = userDao;
+    }
+
+    // 编写工具方法:生成代理: 
+    public UserDao createProxy(){
+        UserDao userDaoProxy = (UserDao) Proxy.newProxyInstance(userDao.getClass().getClassLoader(),userDao.getClass().getInterfaces(), this); 
+        return userDaoProxy;
+    }
+    
+    
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+      if("save".equals(method.getName()))
+      { 
+        System.out.println("权限校验================");
+      }
+      return method.invoke(userDao, args); 
+    }
+}
+```
+
+#### Cglib动态代理手动实现
+
+Cglib是一个第三方包。所有的java类都可以实现动态代理。
+
+```java
+public class MyCglibProxy implements MethodInterceptor
+{ 
+  private CustomerDao customerDao;
+  public MyCglibProxy(CustomerDao customerDao){ 
+    this.customerDao = customerDao;
+  }
+  
+  // 生成代理的方法:
+  public CustomerDao createProxy(){
+    // 创建 Cglib 的核心类:
+    Enhancer enhancer = new Enhancer();
+    // 设置父类: 
+    enhancer.setSuperclass(CustomerDao.class); 
+    // 设置回调:
+    enhancer.setCallback(this);
+    // 生成代理:
+    CustomerDao customerDaoProxy = (CustomerDao) enhancer.create();
+    return customerDaoProxy; 
+  }
+
+  @Override
+  public Object intercept(Object proxy, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
+    if("delete".equals(method.getName())){
+        Object obj = methodProxy.invokeSuper(proxy, args); System.out.println("日志记录================");
+        return obj; 
+    }
+    return methodProxy.invokeSuper(proxy, args); 
+  }
+}
+```
+### Spring的基于AspectJ的AOP开发
+
+AspectJ是一个AOP框架，Spring引入AspectJ作为自身Aop开发。
+
+### AOP 的开发中的相关术语:
+
+* Joinpoint(连接点):所谓连接点是指那些被拦截到的点。在spring中,这些点指的是方法,因为spring只 支持方法类型的连接点.
+* Pointcut(切入点):所谓切入点是指我们要对哪些 Joinpoint 进行拦截的定义.
+* Advice(通知/增强):所谓通知是指拦截到 Joinpoint 之后所要做的事情就是通知.通知分为前置通知,后置 通知,异常通知,最终通知,环绕通知(切面要完成的功能)
+* Introduction(引介):引介是一种特殊的通知在不修改类代码的前提下, Introduction 可以在运行期为类 动态地添加一些方法或 Field.
+  
+* Target(目标对象):代理的目标对象
+* Weaving(织入):是指把增强应用到目标对象来创建新的代理对象的过程. spring 采用动态代理织入，而 AspectJ 采用编译期织入和类装在期织入
+* Proxy(代理):一个类被 AOP 织入增强后，就产生一个结果代理类 
+* Aspect(切面): 是切入点和通知(引介)的结合
+
+图像解析
+![spring12](image/spring12.png)
+
+### AOP开发入门（xml方式）
+
+#### Aop相关jar包
+
+![spring13](image/spring13.png)
+
+spring 的传统 AOP 的开发的包 
+* spring-aop-4.2.4.RELEASE.jar 
+* com.springsource.org.aopalliance-1.0.0.jar
+ 
+aspectJ 的开发包: 
+* com.springsource.org.aspectj.weaver-1.6.8.RELEASE.jar 
+* spring-aspects-4.2.4.RELEASE.jar
+
+#### 引入AOP约束
+
+引入 AOP 约束:
+```xml
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+</beans>
+```
+
+#### 创建接口和类:
+
+```java
+
+public interface OrderDao {
+	public void save();
+
+	public void update();
+
+	public void delete();
+
+	public void find();
+}
+
+public class OrderDaoImpl implements OrderDao {
+	@Override
+	public void save() {
+		System.out.println("保存订单...");
+	}
+
+	@Override
+	public void update() {
+		System.out.println("修改订单...");
+	}
+
+	@Override
+	public void delete() {
+		System.out.println("删除订单...");
+	}
+
+	@Override
+	public void find() {
+		System.out.println("查询订单...");
+	}
+}
+```
+
+#### 目标类的配置
+
+```xml
+<!-- 目标类================ -->
+<bean id="orderDao" class="cn.itcast.spring.demo3.OrderDaoImpl">
+</bean>
+```
+
+#### 整合 Junit 单元测试
+
+```java
+//引入 spring-test.jar
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:applicationContext.xml")
+public class SpringDemo3 {
+	@Resource(name = "orderDao")
+	private OrderDao orderDao;
+
+	@Test
+	public void demo1() {
+		orderDao.save();
+		orderDao.update();
+		orderDao.delete();
+		orderDao.find();
+	}
+}
+```
+
+#### 通知类型
+
+* 前置通知 :在目标方法执行之前执行.
+
+* 后置通知 :在目标方法执行之后执行(一般可以用写日志)
+* 环绕通知 :在目标方法执行前和执行后执行(可以用于阻止方法执行)
+* 异常抛出通知:在目标方法执行出现 异常的时候 执行 
+* 最终通知 :无论目标方法是否出现异常 最终通知都会 执行.
+  
+#### 切入点的表达式
+
+`*` ：表示任意的返回值。或任意字符
+
+`..` ：表示任意参数。或则表示当前包和子包
+
+`+` ：表示当前的类和其子类。
+
+
+```xml
+execution(表达式)
+表达式:
+[方法访问修饰符] 方法返回值 包名.类名.方法名(方法的参数) 
+
+public void cn.itcast.spring.dao.*.*(..)
+
+* cn.itcast.spring.dao.*.*(..) //目标包下所有类所有所有方法都增强
+
+* cn.itcast.spring.dao.UserDao+.*(..) //UserDao和其子类的所有方法都增强
+
+* cn.itcast.spring.dao..*.*(..)//dao包下的所有包以及子包的所有类和所有方法。
+
+* *.*.*.*Dao.save(..)//所有的Dao的save方法都增强
+
+
+```
+
+#### 编写一个切面类
+
+```java
+public class MyAspectXml { // 前置增强
+	public void before() {
+		System.out.println("前置增强===========");
+	}
+}
+```
+#### 配置完成增强
+
+```xml
+  <!-- 配置切面类 -->
+	<bean id="myAspectXml" class="cn.itcast.spring.demo3.MyAspectXml"></bean>
+	<!-- 进行 aop 的配置 -->
+	<aop:config>
+		<!-- 配置切入点表达式:哪些类的哪些方法需要进行增强 -->
+		<aop:pointcut cn.itcast.spring.demo3.OrderDao.save (
+			id="pointcut1" />
+		<!-- 配置切面 -->
+		<aop:aspect ref="myAspectXml">
+			expression="execution(*
+			<aop:before method="before" pointcut-ref="pointcut1" />
+		</aop:aspect>
+	</aop:config> 
+```
+
+#### 其他的增强的配置:
+
+切面类的修改
+
+```java
+/**
+ * 切面类：注解的切面类
+ * @author jt
+ */
+@Aspect
+public class MyAspectAnno {
+
+	public void before(){
+		System.out.println("前置增强===========");
+	}
+	
+	// 后置通知:
+	public void afterReturning(Object result){
+		System.out.println("后置增强==========="+result);
+	}
+	
+	// 环绕通知:
+	public Object around(ProceedingJoinPoint joinPoint) throws Throwable{
+		System.out.println("环绕前增强==========");
+		Object obj  = joinPoint.proceed();
+		System.out.println("环绕后增强==========");
+		return obj;
+	}
+	
+	// 异常抛出通知:
+	public void afterThrowing(Throwable e){
+		System.out.println("异常抛出增强========="+e.getMessage());
+	}
+	
+	// 最终通知
+	public void after(){
+		System.out.println("最终增强============");
+	}
+	
+}
+
+```
+
+
+```xml
+  <!-- 配置切面类 -->
+	<bean id="myAspectXml" class="cn.itcast.spring.demo3.MyAspectXml"></bean>
+	<!-- 进行 aop 的配置 -->
+	<aop:config>
+		<!-- 配置切入点表达式:哪些类的哪些方法需要进行增强 -->
+		<aop:pointcut
+			expression="execution(*
+cn.itcast.spring.demo3.*Dao.save(..))"
+			id="pointcut1" />
+		<aop:pointcut cn.itcast.spring.demo3. * Dao.delete (
+			id="pointcut2" />
+		<aop:pointcut cn.itcast.spring.demo3. * Dao.update (
+			id="pointcut3" />
+		<aop:pointcut cn.itcast.spring.demo3. * Dao.find (
+			id="pointcut4" /> <!-- 配置切面 -->
+		expression="execution(* expression="execution(*
+		expression="execution(*
+		<aop:aspect ref="myAspectXml">
+			<aop:before method="before" pointcut-ref="pointcut1" />
+			<aop:after-returning method="afterReturing"
+				pointcut-ref="pointcut2" />
+			<aop:around method="around" pointcut-ref="pointcut3" />
+			<aop:after-throwing method="afterThrowing"
+				pointcut-ref="pointcut4" />
+			<aop:after method="after" pointcut-ref="pointcut4" />
+		</aop:aspect>
+	</aop:config>
+```
 
 
 
@@ -1050,12 +1620,12 @@ Setter方法注入：Setter方法注入是容器通过调用无参构造器或�
 
 ### 构造器依赖注入和 Setter方法注入的区别
 
-|构造函数注入|	setter 注入|
-|:---|:---|
-|没有部分注入|有部分注入|
-|不会覆盖 setter 属性|	会覆盖 setter 属性|
-|任意修改都会创建一个新实例	| 任意修改不会创建一个新实例|
-|适用于设置很多属性 |适用于设置少量属性|
+| 构造函数注入               | setter 注入                |
+| :------------------------- | :------------------------- |
+| 没有部分注入               | 有部分注入                 |
+| 不会覆盖 setter 属性       | 会覆盖 setter 属性         |
+| 任意修改都会创建一个新实例 | 任意修改不会创建一个新实例 |
+| 适用于设置很多属性         | 适用于设置少量属性         |
 
 两种依赖方式都可以使用，构造器注入和Setter方法注入。最好的解决方案是用构造器参数实现强制依赖，setter方法实现可选依赖。
 
