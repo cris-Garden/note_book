@@ -65,6 +65,39 @@
       - [编写一个切面类](#编写一个切面类)
       - [配置完成增强](#配置完成增强)
       - [其他的增强的配置:](#其他的增强的配置)
+    - [AOP注解开发](#aop注解开发)
+  - [JDBC模版的使用](#jdbc模版的使用)
+    - [Spring提供的持久层技术的模版类](#spring提供的持久层技术的模版类)
+    - [入门程序](#入门程序)
+      - [引入jar包](#引入jar包)
+      - [创建数据库和表](#创建数据库和表)
+      - [JDBC模版保存数据](#jdbc模版保存数据)
+      - [把JDBC模版的使用和spring整合](#把jdbc模版的使用和spring整合)
+    - [使用开源数据库连接池的配置](#使用开源数据库连接池的配置)
+      - [dbcp的使用](#dbcp的使用)
+        - [引入jar包](#引入jar包-1)
+        - [配置dbcp连接池](#配置dbcp连接池)
+      - [c3p0](#c3p0)
+        - [引入C3P0jar包](#引入c3p0jar包)
+        - [配置c3p0](#配置c3p0)
+    - [模版的CRUD操作](#模版的crud操作)
+  - [spring事务管理](#spring事务管理)
+    - [什么事事务](#什么事事务)
+    - [事务的特性](#事务的特性)
+      - [读问题](#读问题)
+      - [写问题](#写问题)
+      - [解决读问题](#解决读问题)
+    - [Spring事务管理API](#spring事务管理api)
+      - [PlatformTransactionManager：平台事务管理器](#platformtransactionmanager平台事务管理器)
+      - [TransactionStatus：事务的状态](#transactionstatus事务的状态)
+      - [事务管理API关系](#事务管理api关系)
+      - [事务传播行为](#事务传播行为)
+    - [Spring事务管理的使用](#spring事务管理的使用)
+      - [创建Service接口和实现类（编程式）](#创建service接口和实现类编程式)
+      - [创建Dao的接口和实现类（编程式）](#创建dao的接口和实现类编程式)
+      - [配置service和Dao给spring管理（编程式）](#配置service和dao给spring管理编程式)
+    - [声明式的事务管理](#声明式的事务管理)
+      - [xml声明式的事务管理](#xml声明式的事务管理)
 - [tips](#tips)
   - [Spring概述（10）](#spring概述10)
     - [什么是spring?](#什么是spring)
@@ -1288,7 +1321,649 @@ cn.itcast.spring.demo3.*Dao.save(..))"
 	</aop:config>
 ```
 
+### AOP注解开发
 
+开启AOP注解,配置切面类和目标类
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- 在配置文件中开启注解的AOP的开发============ -->
+	<aop:aspectj-autoproxy/>
+	
+	<!-- 配置目标类================ -->
+	<bean id="orderDao" class="com.itheima.spring.demo1.OrderDao">
+	
+	</bean>
+	
+	<!-- 配置切面类================ -->
+	<bean id="myAspect" class="com.itheima.spring.demo1.MyAspectAnno">
+	
+	</bean>
+</beans> 
+
+```
+
+编写切面类
+
+```java
+package com.itheima.spring.demo1;
+
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+
+/**
+ * 切面类：注解的切面类
+ * @author jt
+ */
+@Aspect
+public class MyAspectAnno {
+
+	@Before(value="MyAspectAnno.pointcut2()")
+	public void before(){
+		System.out.println("前置增强===========");
+	}
+	
+	// 后置通知:
+	@AfterReturning(value="MyAspectAnno.pointcut4()",returning="result")
+	public void afterReturning(Object result){
+		System.out.println("后置增强==========="+result);
+	}
+	
+	// 环绕通知:
+	@Around(value="MyAspectAnno.pointcut3()")
+	public Object around(ProceedingJoinPoint joinPoint) throws Throwable{
+		System.out.println("环绕前增强==========");
+		Object obj  = joinPoint.proceed();
+		System.out.println("环绕后增强==========");
+		return obj;
+	}
+	
+	// 异常抛出通知:
+	@AfterThrowing(value="MyAspectAnno.pointcut1()",throwing="e")
+	public void afterThrowing(Throwable e){
+		System.out.println("异常抛出增强========="+e.getMessage());
+	}
+	
+	// 最终通知
+	@After(value="MyAspectAnno.pointcut1()")
+	public void after(){
+		System.out.println("最终增强============");
+	}
+	
+	// 切入点注解：
+	@Pointcut(value="execution(* com.itheima.spring.demo1.OrderDao.find(..))")
+	private void pointcut1(){}
+	@Pointcut(value="execution(* com.itheima.spring.demo1.OrderDao.save(..))")
+	private void pointcut2(){}
+	@Pointcut(value="execution(* com.itheima.spring.demo1.OrderDao.update(..))")
+	private void pointcut3(){}
+	@Pointcut(value="execution(* com.itheima.spring.demo1.OrderDao.delete(..))")
+	private void pointcut4(){}
+}
+
+```
+
+>切入点注解和通知注解可以分别xml和注解开发。是相互独立，可以全注解全xml。
+
+
+## JDBC模版的使用
+
+### Spring提供的持久层技术的模版类
+
+![spring14](image/spring14.png)
+
+### 入门程序
+
+#### 引入jar包
+
+*	引入基本开发包：
+
+*	数据库驱动
+*	Spring的JDBC模板的jar包
+
+
+![image](image/spring15.png)
+
+#### 创建数据库和表
+
+```sql
+create database spring4_day03;
+use spring4_day03;
+create table account(
+	id int primary key auto_increment,
+	name varchar(20),
+	money double
+);
+```
+
+#### JDBC模版保存数据
+
+普通的jdbc模版使用
+```java
+/**
+ * JDBC模板的使用
+ * @author jt
+ *
+ */
+public class JdbcDemo1 {
+
+	@Test
+	// jdbc模板的使用类似于Dbutils.
+	public void demo1(){
+		// 创建连接池:使用spring默认的连接池
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		//设置驱动
+		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		//使用哪一个数据库
+		dataSource.setUrl("jdbc:mysql:///spring4_day03");
+		//用户
+		dataSource.setUsername("root");
+		//密码
+		dataSource.setPassword("abc");
+		// 创建jdbc模板
+		JdbcTemplate jdbcTemplate = new JdbcTemplate();
+		jdbcTemplate.setDataSource(dataSource);
+		jdbcTemplate.update("insert into account values (null,?,?)", "赵冠希",10000d);
+	}
+}
+```
+
+#### 把JDBC模版的使用和spring整合
+
+xml 配置
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- 配置Spring的内置的连接池======================== -->
+  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql:///spring4_day03"/>
+		<property name="username" value="root"/>
+		<property name="password" value="abc"/>
+	</bean>
+
+    <!-- 配置Spring的JDBC的模板========================= -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+</beans>
+```
+
+测试程序
+```java
+package com.itheima.jdbc.demo1;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.itheima.jdbc.domain.Account;
+
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:applicationContext.xml")
+public class JdbcDemo2 {
+  //能在测试类使用注解方式注入是因为test包底层已经帮你实现好了，如果要在类里使用需要在配置文件开启注解
+	@Resource(name= "jdbcTemplate")
+	private JdbcTemplate jdbcTemplate;
+	
+	@Test
+	// 保存操作
+	public void demo1(){
+		jdbcTemplate.update("insert into account values (null,?,?)", "何菊花",10000d);
+	}
+}
+```
+>测试程序使用的依赖aop包，还需要额外引入aop的包。
+
+### 使用开源数据库连接池的配置
+
+#### dbcp的使用
+
+##### 引入jar包
+![spring16](image/spring16.png)
+
+##### 配置dbcp连接池
+
+```xml
+
+<!-- 配置DBCP连接池=============================== -->
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql:///spring4_day03"/>
+		<property name="username" value="root"/>
+		<property name="password" value="abc"/>
+	</bean> 
+
+    <!-- 配置Spring的JDBC的模板========================= -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+```
+
+#### c3p0
+
+##### 引入C3P0jar包
+![spring17](image/spring17.png)
+
+##### 配置c3p0
+
+```xml
+  <!-- 引入属性文件================================== -->
+	<!-- 第一种方式通过一个bean标签引入的（很少） -->
+  <!-- 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:jdbc.properties"/>
+	</bean> -->
+	
+	<!-- 第二种方式通过context标签引入的 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	
+	<!-- 配置C3P0连接池=============================== -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driverClass}"/>
+		<property name="jdbcUrl" value="${jdbc.url}"/>
+		<property name="user" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+	</bean>
+	
+	<!-- 配置Spring的JDBC的模板========================= -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+```
+
+### 模版的CRUD操作
+
+```java
+package com.itheima.jdbc.demo1;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.itheima.jdbc.domain.Account;
+
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:applicationContext.xml")
+public class JdbcDemo2 {
+  //能在测试类使用注解方式注入是因为test包底层已经帮你实现好了，如果要在类里使用需要在配置文件开启注解
+	@Resource(name= "jdbcTemplate")
+	private JdbcTemplate jdbcTemplate;
+	
+	@Test
+	// 保存操作
+	public void demo1(){
+		jdbcTemplate.update("insert into account values (null,?,?)", "何菊花",10000d);
+	}
+	
+	@Test
+	// 修改操作
+	public void demo2(){
+		jdbcTemplate.update("update account set name = ? ,money = ? where id = ?", "何巨涛",2000d,6);
+	}
+	
+	@Test
+	// 删除操作
+	public void demo3(){
+		jdbcTemplate.update("delete from account where id = ?", 6);
+	}
+	
+	@Test
+	// 查询操作：
+	public void demo4(){
+		String name = jdbcTemplate.queryForObject("select name from account where id = ?", String.class, 5);
+		System.out.println(name);
+	}
+	
+	@Test
+	// 统计查询
+	public void demo5(){
+		Long count = jdbcTemplate.queryForObject("select count(*) from account", Long.class);
+		System.out.println(count);
+	}
+	
+	@Test
+	// 封装到一个对象中
+	public void demo6(){
+		Account account = jdbcTemplate.queryForObject("select * from account where id = ?", new MyRowMapper(), 5);
+		System.out.println(account);
+	}
+	
+	@Test
+	// 查询多条记录
+	public void demo7(){
+		List<Account> list = jdbcTemplate.query("select * from account", new MyRowMapper());
+		for (Account account : list) {
+			System.out.println(account);
+		}
+	}
+	
+	class MyRowMapper implements RowMapper<Account>{
+
+		@Override
+		public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Account account = new Account();
+			account.setId(rs.getInt("id"));
+			account.setName(rs.getString("name"));
+			account.setMoney(rs.getDouble("money"));
+			return account;
+		}
+		
+	}
+}
+``` 
+
+## spring事务管理
+
+### 什么事事务
+
+* 事务：逻辑上的一组操作，组成这组操作的各个单元，要么全都成功，要么全都失败。
+
+### 事务的特性
+
+*	原子性：事务不可分割
+*	一致性：事务执行前后数据完整性保持一致
+*	隔离性：一个事务的执行不应该受到其他事务的干扰
+*	持久性：一旦事务结束，数据就持久化到数据库
+
+###	如果不考虑隔离性引发安全性问题
+
+#### 读问题
+*	脏读		：一个事务读到另一个事务未提交的数据
+*	不可重复读	：一个事务读到另一个事务已经提交的update的数据，导致一个事务中多次查询结果不一致
+*	虚读、幻读	：一个事务读到另一个事务已经提交的insert的数据，导致一个事务中多次查询结果不一致。
+#### 写问题
+*	丢失更新
+
+#### 解决读问题
+
+设置事务的隔离级别
+* Read uncommitted	：未提交读，任何读问题解决不了。
+* Read committed	：已提交读，解决脏读，但是不可重复读和虚读有可能发生。（oracle）
+* Repeatable read	：重复读，解决脏读和不可重复读，但是虚读有可能发生。（mysql）
+* Serializable		：解决所有读问题。
+
+实际开发中一般使用中间两个Read committed和Repeatable read
+
+### Spring事务管理API
+
+#### PlatformTransactionManager：平台事务管理器
+
+PlatformTransactionManager：这是一个接口，是Spring用于管理事务的真正的对象。
+
+* DataSourceTransactionManager	：底层使用JDBC管理事务
+* HibernateTransactionManager	：底层使用Hibernate管理事务
+
+####	TransactionDefinition	：事务定义信息
+
+*	事务定义：用于定义事务的相关的信息，隔离级别、超时信息、**传播行为**、是否只读
+
+#### TransactionStatus：事务的状态
+
+*	事务状态：用于记录在事务管理过程中，事务的状态的对象。记录是否已经提交，是否已经回滚等。
+
+#### 事务管理API关系
+
+Spring进行事务管理的时候，首先平台事务管理器根据事务定义信息进行事务的管理，在事务管理过程中，产生各种状态，将这些状态的信息记录到事务状态的对象中。
+
+#### 事务传播行为
+
+spring事务的传播行为说的是，当多个事务同时存在的时候，spring如何处理这些事务的行为。如多service相互调用，每个事务都有自己的事务。
+
+Spring中提供了七种事务的传播行为：
+1. 保证多个操作在同一个事务中
+*	PROPAGATION_REQUIRED		：默认值，如果A中有事务，使用A中的事务，如果A没有，创建一个新的事务，将操作包含进来
+
+*	PROPAGATION_SUPPORTS		：支持事务，如果A中有事务，使用A中的事务。如果A没有事务，不使用事务。
+*	PROPAGATION_MANDATORY	：如果A中有事务，使用A中的事务。如果A没有事务，抛出异常。
+
+2. 保证多个操作不在同一个事务中
+*	PROPAGATION_REQUIRES_NEW		：如果A中有事务，将A的事务挂起（暂停），创建新事务，只包含自身操作。如果A中没有事务，创建一个新事务，包含自身操作。
+
+*	PROPAGATION_NOT_SUPPORTED	：如果A中有事务，将A的事务挂起。不使用事务管理。
+*	PROPAGATION_NEVER				：如果A中有事务，报异常。
+
+3. 嵌套式事务
+*	PROPAGATION_NESTED			：嵌套事务，如果A中有事务，按照A的事务执行，执行完成后，设置一个保存点，执行B中的操作，如果没有异常，执行通过，如果有异常，可以选择回滚到最初始位置，也可以回滚到保存点。
+
+>提供的其中事务行为主要记住PROPAGATION_REQUIRED，PROPAGATION_REQUIRES_NEW，PROPAGATION_NESTED三种就可以了。
+
+### Spring事务管理的使用
+
+#### 创建Service接口和实现类（编程式）
+
+```java
+package com.itheima.tx.demo1;
+/**
+ * 转账的业务层的接口
+ * @author jt
+ *
+ */
+public interface AccountService {
+
+	public void transfer(String from,String to,Double money);
+	
+}
+
+```
+
+```java
+package com.itheima.tx.demo1;
+
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.transaction.support.TransactionTemplate;
+
+/**
+ * 转账的业务层的实现类
+ * @author jt
+ *
+ */
+public class AccountServiceImpl implements AccountService {
+
+	// 注入DAO:
+	private AccountDao accountDao;
+	
+	public void setAccountDao(AccountDao accountDao) {
+		this.accountDao = accountDao;
+	}
+	
+	// 注入事务管理的模板
+	private TransactionTemplate trsactionTemplate;
+
+	public void setTrsactionTemplate(TransactionTemplate trsactionTemplate) {
+		this.trsactionTemplate = trsactionTemplate;
+	}
+
+	@Override
+	/**
+	 * from：转出账号
+	 * to：转入账号
+	 * money：转账金额
+	 */
+	public void transfer(final String from, final String to, final Double money) {
+		
+		trsactionTemplate.execute(new TransactionCallbackWithoutResult() {
+			@Override
+			protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
+				accountDao.outMoney(from, money);
+				int d = 1/0;
+				accountDao.inMoney(to, money);
+			}
+		});
+		
+	}
+
+}
+```
+
+#### 创建Dao的接口和实现类（编程式）
+```java
+package com.itheima.tx.demo1;
+/**
+ * 转账的DAO的接口
+ * @author jt
+ *
+ */
+public interface AccountDao {
+	public void outMoney(String from ,Double money);
+	public void inMoney(String to ,Double money);
+}
+
+```
+
+```java
+package com.itheima.tx.demo1;
+
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
+
+/**
+ * 转账的DAO的实现类
+ * @author jt
+ *
+ */
+public class AccountDaoImpl extends JdbcDaoSupport implements AccountDao {
+
+	@Override
+	public void outMoney(String from, Double money) {
+		this.getJdbcTemplate().update("update account set money = money - ? where name = ?", money,from);
+	}
+
+	@Override
+	public void inMoney(String to, Double money) {
+		this.getJdbcTemplate().update("update account set money = money + ? where name = ?", money ,to);
+	}
+
+}
+
+```
+
+>spring继承JdbcDaoSupport提供了jdbc模版类的set方法。
+
+#### 配置service和Dao给spring管理（编程式）
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- 配置Service============= -->
+	<bean id="accountService" class="com.itheima.tx.demo1.AccountServiceImpl">
+		<property name="accountDao" ref="accountDao"/>
+		<!-- 注入 事务管理的模板 -->
+		<property name="trsactionTemplate" ref="transactionTemplate"/>
+	</bean>
+	
+	<!-- 配置DAO================= -->
+	<bean id="accountDao" class="com.itheima.tx.demo1.AccountDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 配置连接池和JDBC的模板 -->
+	<!-- 第二种方式通过context标签引入的 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	
+	<!-- 配置C3P0连接池=============================== -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driverClass}"/>
+		<property name="jdbcUrl" value="${jdbc.url}"/>
+		<property name="user" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+	</bean>
+	
+	<!-- 配置平台事务管理器============================= -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 配置事务管理的模板 -->
+	<bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager"/>
+	</bean>
+</beans>
+
+```
+
+注意点：
+
+* 事务管理器需要配置连接池
+  
+* 配置事务管理的模板用于简化事务代码的编写。真正做事务管理的还是管理器，所以你需要注入管理器。
+
+### 声明式的事务管理
+
+声明式的事务管理：底层使用的是aop
+
+分为xml和注解开发。
+
+#### xml声明式的事务管理
+  
 
 
 # tips
