@@ -98,6 +98,10 @@
       - [配置service和Dao给spring管理（编程式）](#配置service和dao给spring管理编程式)
     - [声明式的事务管理](#声明式的事务管理)
       - [xml声明式的事务管理](#xml声明式的事务管理)
+        - [service实现类的改造](#service实现类的改造)
+        - [配置文件事务管理器和增强](#配置文件事务管理器和增强)
+      - [注解声明式的事务管理](#注解声明式的事务管理)
+      - [业务层添加注解](#业务层添加注解)
 - [tips](#tips)
   - [Spring概述（10）](#spring概述10)
     - [什么是spring?](#什么是spring)
@@ -1963,6 +1967,222 @@ public class AccountDaoImpl extends JdbcDaoSupport implements AccountDao {
 分为xml和注解开发。
 
 #### xml声明式的事务管理
+
+##### service实现类的改造
+
+去掉实现类里面事务管理模版相关的代码。
+
+```java
+package com.itheima.tx.demo2;
+
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.transaction.support.TransactionTemplate;
+
+/**
+ * 转账的业务层的实现类
+ * @author jt
+ *
+ */
+public class AccountServiceImpl implements AccountService {
+
+	// 注入DAO:
+	private AccountDao accountDao;
+	
+	public void setAccountDao(AccountDao accountDao) {
+		this.accountDao = accountDao;
+	}
+	
+	@Override
+	/**
+	 * from：转出账号
+	 * to：转入账号
+	 * money：转账金额
+	 */
+	public void transfer( String from,  String to,  Double money) {
+		
+		accountDao.outMoney(from, money);
+//		int d = 1/0;
+		accountDao.inMoney(to, money);
+		
+	}
+
+}
+
+```
+
+##### 配置文件事务管理器和增强 
+```xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- 配置Service============= -->
+	<bean id="accountService" class="com.itheima.tx.demo2.AccountServiceImpl">
+		<property name="accountDao" ref="accountDao"/>
+	</bean>
+	
+	<!-- 配置DAO================= -->
+	<bean id="accountDao" class="com.itheima.tx.demo2.AccountDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 配置连接池和JDBC的模板 -->
+	<!-- 第二种方式通过context标签引入的 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	
+	<!-- 配置C3P0连接池=============================== -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driverClass}"/>
+		<property name="jdbcUrl" value="${jdbc.url}"/>
+		<property name="user" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+	</bean>
+	
+	<!-- 配置事务管理器=============================== -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 配置事务的增强=============================== -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!-- 事务管理的规则 -->
+			<!-- <tx:method name="save*" propagation="REQUIRED" isolation="DEFAULT"/>
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="delete*" propagation="REQUIRED"/>
+			<tx:method name="find*" read-only="true"/> -->
+			<tx:method name="*" propagation="REQUIRED" read-only="false"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- aop的配置 -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.itheima.tx.demo2.AccountServiceImpl.*(..))" id="pointcut1"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut1"/>
+	</aop:config>
+
+</beans>
+
+```
+
+* propagation属性：表示事务的传播
+* isolation：表示隔离级别
+* read-only：只读
+* timeout：超时时间。value等于-1就表示在程序执行时间内不会超时
+
+#### 注解声明式的事务管理
+
+配置文件
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- 配置Service============= -->
+	<bean id="accountService" class="com.itheima.tx.demo3.AccountServiceImpl">
+		<property name="accountDao" ref="accountDao"/>
+	</bean>
+	
+	<!-- 配置DAO================= -->
+	<bean id="accountDao" class="com.itheima.tx.demo3.AccountDaoImpl">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 配置连接池和JDBC的模板 -->
+	<!-- 第二种方式通过context标签引入的 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	
+	<!-- 配置C3P0连接池=============================== -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driverClass}"/>
+		<property name="jdbcUrl" value="${jdbc.url}"/>
+		<property name="user" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+	</bean>
+	
+	<!-- 配置事务管理器=============================== -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 开启注解事务================================ -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+</beans>
+
+```
+
+#### 业务层添加注解
+
+@Transactional(isolation=Isolation.DEFAULT,propagation=Propagation.REQUIRED)
+
+```java
+package com.itheima.tx.demo3;
+
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.transaction.support.TransactionTemplate;
+
+/**
+ * 转账的业务层的实现类
+ * @author jt
+ *
+ */
+@Transactional(isolation=Isolation.DEFAULT,propagation=Propagation.REQUIRED)
+public class AccountServiceImpl implements AccountService {
+
+	// 注入DAO:
+	private AccountDao accountDao;
+	
+	public void setAccountDao(AccountDao accountDao) {
+		this.accountDao = accountDao;
+	}
+	
+	@Override
+	/**
+	 * from：转出账号
+	 * to：转入账号
+	 * money：转账金额
+	 */
+	public void transfer( String from,  String to,  Double money) {
+		
+			accountDao.outMoney(from, money);
+			int d = 1/0;
+			accountDao.inMoney(to, money);
+		
+	}
+
+}
+
+```
+
   
 
 
