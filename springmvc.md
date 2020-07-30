@@ -1,60 +1,97 @@
 
 - [SpringMVC](#springmvc)
-  - [Springmvc处理流程](#springmvc处理流程)
-  - [入门程序](#入门程序)
-    - [创建web工程](#创建web工程)
-    - [导入jar包](#导入jar包)
-    - [创建springmvc.xml](#创建springmvcxml)
-    - [配置前段控制器](#配置前段控制器)
-    - [加入jsp页面](#加入jsp页面)
-    - [创建商品pojo](#创建商品pojo)
-    - [创建ItemController](#创建itemcontroller)
-    - [运行测试](#运行测试)
-  - [SpringMVC架构](#springmvc架构)
-    - [架构结构](#架构结构)
-    - [组件说明](#组件说明)
-      - [DispatcherServlet：前端控制器](#dispatcherservlet前端控制器)
-      - [HandlerMapping：处理器映射器](#handlermapping处理器映射器)
-      - [Handler：处理器](#handler处理器)
-      - [HandlAdapter：处理器适配器](#handladapter处理器适配器)
-      - [ViewResolver：视图解析器](#viewresolver视图解析器)
-      - [View：视图](#view视图)
-    - [spring默认加载的组件](#spring默认加载的组件)
-    - [组件扫描](#组件扫描)
-    - [注解映射器和适配器](#注解映射器和适配器)
-      - [配置处理器映射器](#配置处理器映射器)
-      - [配置处理器适配器](#配置处理器适配器)
-      - [注解驱动](#注解驱动)
-      - [视图解析器](#视图解析器)
-      - [修改ItemController](#修改itemcontroller)
-      - [效果](#效果)
-  - [SpringMVC整合Mybatis](#springmvc整合mybatis)
-    - [导入jar包](#导入jar包-1)
-    - [整合思路](#整合思路)
-    - [配置文件](#配置文件)
-      - [sqlMapConfig.xml](#sqlmapconfigxml)
-      - [applicationContext-dao.xml](#applicationcontext-daoxml)
-      - [db.properties](#dbproperties)
-      - [applicationContext-service.xml](#applicationcontext-servicexml)
-      - [applicationContext-trans.xml](#applicationcontext-transxml)
-      - [springmvc.xml](#springmvcxml)
-      - [web.xml](#webxml)
-      - [itemList.jsp和itemEdit.jsp到工程中](#itemlistjsp和itemeditjsp到工程中)
-  - [参数绑定](#参数绑定)
-    - [springmvc 默认支持的类型](#springmvc-默认支持的类型)
-    - [简单数据类型](#简单数据类型)
-    - [pojo类型](#pojo类型)
-    - [pojo包装类型](#pojo包装类型)
-    - [自定义参数类型](#自定义参数类型)
-  - [SpringMVC和Struts2的区别](#springmvc和struts2的区别)
-  - [高级参数绑定](#高级参数绑定)
-  - [@RequestMapping注解使用](#requestmapping注解使用)
-  - [controller返回值](#controller返回值)
-  - [springmvc异常处理](#springmvc异常处理)
-  - [图片上传处理](#图片上传处理)
-  - [json数据交互](#json数据交互)
-  - [Springmvc 实现restfull](#springmvc-实现restfull)
-  - [拦截器](#拦截器)
+	- [Springmvc处理流程](#springmvc处理流程)
+	- [入门程序](#入门程序)
+		- [创建web工程](#创建web工程)
+		- [导入jar包](#导入jar包)
+		- [创建springmvc.xml](#创建springmvcxml)
+		- [配置前段控制器](#配置前段控制器)
+		- [加入jsp页面](#加入jsp页面)
+		- [创建商品pojo](#创建商品pojo)
+		- [创建ItemController](#创建itemcontroller)
+		- [运行测试](#运行测试)
+	- [SpringMVC架构](#springmvc架构)
+		- [架构结构](#架构结构)
+		- [组件说明](#组件说明)
+			- [DispatcherServlet：前端控制器](#dispatcherservlet前端控制器)
+			- [HandlerMapping：处理器映射器](#handlermapping处理器映射器)
+			- [Handler：处理器](#handler处理器)
+			- [HandlAdapter：处理器适配器](#handladapter处理器适配器)
+			- [ViewResolver：视图解析器](#viewresolver视图解析器)
+			- [View：视图](#view视图)
+		- [spring默认加载的组件](#spring默认加载的组件)
+		- [组件扫描](#组件扫描)
+		- [注解映射器和适配器](#注解映射器和适配器)
+			- [配置处理器映射器](#配置处理器映射器)
+			- [配置处理器适配器](#配置处理器适配器)
+			- [注解驱动](#注解驱动)
+			- [视图解析器](#视图解析器)
+			- [修改ItemController](#修改itemcontroller)
+			- [效果](#效果)
+	- [SpringMVC整合Mybatis](#springmvc整合mybatis)
+		- [创建数据库数据](#创建数据库数据)
+		- [导入整合相关jar包](#导入整合相关jar包)
+		- [整合思路](#整合思路)
+		- [配置文件](#配置文件)
+			- [sqlMapConfig.xml](#sqlmapconfigxml)
+			- [applicationContext-dao.xml](#applicationcontext-daoxml)
+			- [db.properties](#dbproperties)
+			- [applicationContext-service.xml](#applicationcontext-servicexml)
+			- [applicationContext-trans.xml](#applicationcontext-transxml)
+			- [springmvc.xml](#springmvcxml)
+			- [web.xml](#webxml)
+			- [itemList.jsp和itemEdit.jsp到工程中](#itemlistjsp和itemeditjsp到工程中)
+			- [配置完效果如下图：](#配置完效果如下图)
+		- [实现商品列表显示](#实现商品列表显示)
+			- [使用逆向工程，生成代码](#使用逆向工程生成代码)
+			- [配置service和controller相关代码](#配置service和controller相关代码)
+				- [ItemService接口](#itemservice接口)
+				- [ItemServiceImpl实现类](#itemserviceimpl实现类)
+				- [ItemController](#itemcontroller)
+		- [测试](#测试)
+	- [参数绑定](#参数绑定)
+		- [需求](#需求)
+		- [需求分析](#需求分析)
+		- [编写service代码](#编写service代码)
+			- [ItemService接口](#itemservice接口-1)
+			- [ItemServiceImpl实现类](#itemserviceimpl实现类-1)
+			- [ItemController](#itemcontroller-1)
+				- [springmvc 默认支持的类型](#springmvc-默认支持的类型)
+					- [HttpServletRequest](#httpservletrequest)
+					- [HttpServletResponse](#httpservletresponse)
+					- [HttpSession](#httpsession)
+				- [ModelAndView返回数据](#modelandview返回数据)
+				- [Model/ModelMap返回数据](#modelmodelmap返回数据)
+		- [请求参数类型获取](#请求参数类型获取)
+			- [获取简单数据类型](#获取简单数据类型)
+			- [支持的数据类型](#支持的数据类型)
+			- [@RequestParam](#requestparam)
+		- [pojo类型](#pojo类型)
+			- [将页面修改后的商品信息保存到数据库中。](#将页面修改后的商品信息保存到数据库中)
+				- [使用pojo接收表单数据](#使用pojo接收表单数据)
+				- [ItemService接口](#itemservice接口-2)
+				- [ItemServiceImpl实现类](#itemserviceimpl实现类-2)
+				- [ItemController](#itemcontroller-2)
+				- [编写success页面](#编写success页面)
+				- [6.3.8. 解决post乱码问题](#638-解决post乱码问题)
+		- [pojo包装类型](#pojo包装类型)
+			- [使用包装的pojo接收商品信息的查询条件。](#使用包装的pojo接收商品信息的查询条件)
+				- [接收查询条件](#接收查询条件)
+		- [自定义参数类型](#自定义参数类型)
+			- [需求在商品修改页面可以修改商品的生产日期，并且根据业务需求自定义日期格式。](#需求在商品修改页面可以修改商品的生产日期并且根据业务需求自定义日期格式)
+			- [修改itemEdit.jsp](#修改itemeditjsp)
+			- [自定义Converter](#自定义converter)
+			- [配置Converter](#配置converter)
+			- [配置方式2（了解）](#配置方式2了解)
+	- [SpringMVC和Struts2的区别](#springmvc和struts2的区别)
+	- [高级参数绑定](#高级参数绑定)
+	- [@RequestMapping注解使用](#requestmapping注解使用)
+	- [controller返回值](#controller返回值)
+	- [springmvc异常处理](#springmvc异常处理)
+	- [图片上传处理](#图片上传处理)
+	- [json数据交互](#json数据交互)
+	- [Springmvc 实现restfull](#springmvc-实现restfull)
+	- [拦截器](#拦截器)
 
 # SpringMVC
 
@@ -83,6 +120,7 @@ Dynamic web moudle 的版本是2.5，可以自动生成web.xml配置文件，
 ### 导入jar包
 
 复制jar到lib目录，工程直接加载jar包，如下图：
+
 ![3](image/Springmvc3.png)
 
 ### 创建springmvc.xml
@@ -269,6 +307,7 @@ public class ItemController {
 http://127.0.0.1:8080/springmvc-first/itemList.action
 
 效果如下图：
+
 ![6](image/Springmvc6.png)
 
 
@@ -278,6 +317,7 @@ http://127.0.0.1:8080/springmvc-first/itemList.action
 ### 架构结构
 
 框架结构如下图：
+
 ![7](image/Springmvc7.png)
 
 
@@ -460,6 +500,7 @@ public ModelAndView queryItemList() {
 ```
 #### 效果
 效果和之前一样，如下图：
+
 ![s](image/Springmvc6.png)
 
 
@@ -472,7 +513,11 @@ springmvc和spring是无缝整合(没有整合包)，spring和mybatis整合。�
 
 整合目标：控制层采用springmvc、持久层使用mybatis实现。
 
-### 导入jar包
+### 创建数据库数据
+
+[sql脚本](heima/spring-mvc/01/note/code/prepare/sql/springmvc.sql)
+
+### 导入整合相关jar包
 
 1.	spring（包括springmvc）
 2.	mybatis
@@ -717,23 +762,591 @@ jdbc.password=root
 
 #### itemList.jsp和itemEdit.jsp到工程中
 
-[itemList.jsp](/heima/spring-mvc/01 SpringMvc基础/源码笔记/01.参考资料/案例/jsp/editItem.jsp)
+[itemList.jsp](heima/spring-mvc/01/note/code/prepare/jsp/itemList.jsp)
 
+[itemEdit.jsp](heima/spring-mvc/01/note/code/prepare/jsp/editItem.jsp)
 
+#### 配置完效果如下图：
 
+![12](image/Springmvc12.png)
+
+### 实现商品列表显示
+
+实现商品查询列表，从mysql数据库查询商品信息。
+
+#### 使用逆向工程，生成代码
+
+注意修改逆向工程的配置文件，参考MyBatis第二天
+逆向工程生成代码如下图：
+
+![13](image/Springmvc13.png)
+
+#### 配置service和controller相关代码
+
+##### ItemService接口
+```java
+public interface ItemService {
+
+	/**
+	 * 查询商品列表
+	 * 
+	 * @return
+	 */
+	List<Item> queryItemList();
+
+}
+```
+
+##### ItemServiceImpl实现类
+```java
+@Service
+public class ItemServiceImpl implements ItemService {
+
+	@Autowired
+	private ItemMapper itemMapper;
+
+	@Override
+	public List<Item> queryItemList() {
+		// 从数据库查询商品数据
+		List<Item> list = this.itemMapper.selectByExample(null);
+
+		return list;
+	}
+
+}
+```
+
+##### ItemController
+```java
+@Controller
+public class ItemController {
+
+	@Autowired
+	private ItemService itemService;
+
+	/**
+	 * 显示商品列表
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/itemList")
+	public ModelAndView queryItemList() {
+		// 获取商品数据
+		List<Item> list = this.itemService.queryItemList();
+
+		ModelAndView modelAndView = new ModelAndView();
+		// 把商品数据放到模型中
+		modelAndView.addObject("itemList", list);
+		// 设置逻辑视图
+		modelAndView.setViewName("itemList");
+
+		return modelAndView;
+	}
+
+}
+```
+
+### 测试
+访问url：
+http://127.0.0.1:8080/springmvc-web/itemList.action
+
+效果如下图：
+
+![14](image/Springmvc14.png)
+ 
 ## 参数绑定
 
-### springmvc 默认支持的类型
 
-### 简单数据类型
+### 需求
+打开商品编辑页面，展示商品信息。
+
+### 需求分析
+
+编辑商品信息，首先要显示商品详情
+需要根据商品id查询商品信息，然后展示到页面。
+请求的url：/itemEdit.action
+参数：id（商品id）
+响应结果：商品编辑页面，展示商品详细信息。
+
+
+### 编写service代码
+
+#### ItemService接口
+
+```java
+/*
+* 根据商品id查询商品
+* @param id
+* @return 
+*/
+
+Item queryItemByID(int id);
+
+```
+#### ItemServiceImpl实现类
+
+```java
+@Override
+public Item queryItemById(int id) {
+	Item item = this.itemMapper.selectByPrimaryKey(id);
+	
+	return item;
+}
+
+```
+
+#### ItemController
+
+页面点击修改按钮，发起请求
+http://127.0.0.1:8080/springmvc-web/itemEdit.action?id=1
+
+需要从请求的参数中把请求的id取出来。
+Id包含在Request对象中。可以从Request对象中取id。
+
+想获得Request对象只需要在Controller方法的形参中添加一个参数即可。Springmvc框架会自动把Request对象传递给方法。
+
+##### springmvc 默认支持的类型
+
+处理器形参中添加如下类型的参数处理适配器会默认识别并进行赋值。
+###### HttpServletRequest
+通过request对象获取请求信息
+###### HttpServletResponse
+通过response处理响应信息
+###### HttpSession
+通过session对象得到session中存放的对象
+
+##### ModelAndView返回数据
+
+```java
+/**
+ * 根据id查询商品
+ * 
+ * @param request
+ * @return
+ */
+@RequestMapping("/itemEdit")
+public ModelAndView queryItemById(HttpServletRequest request) {
+	// 从request中获取请求参数
+	String strId = request.getParameter("id");
+	Integer id = Integer.valueOf(strId);
+
+	// 根据id查询商品数据
+	Item item = this.itemService.queryItemById(id);
+
+	// 把结果传递给页面
+	ModelAndView modelAndView = new ModelAndView();
+	// 把商品数据放在模型中
+	modelAndView.addObject("item", item);
+	// 设置逻辑视图
+	modelAndView.setViewName("itemEdit");
+
+	return modelAndView;
+}
+
+
+```
+
+
+
+##### Model/ModelMap返回数据
+
+除了ModelAndView以外，还可以使用Model来向页面传递数据，
+Model是一个接口，在参数里直接声明model即可。
+
+如果使用Model则可以不使用ModelAndView对象，Model对象可以向页面传递数据，View对象则可以使用String返回值替代。
+不管是Model还是ModelAndView，其本质都是使用Request对象向jsp传递数据。
+代码实现：
+
+ Model返回数据
+ 
+```java
+/**
+ * 根据id查询商品,使用Model
+ * 
+ * @param request
+ * @param model
+ * @return
+ */
+@RequestMapping("/itemEdit")
+public String queryItemById(HttpServletRequest request, Model model) {
+	// 从request中获取请求参数
+	String strId = request.getParameter("id");
+	Integer id = Integer.valueOf(strId);
+
+	// 根据id查询商品数据
+	Item item = this.itemService.queryItemById(id);
+
+	// 把结果传递给页面
+	// ModelAndView modelAndView = new ModelAndView();
+	// 把商品数据放在模型中
+	// modelAndView.addObject("item", item);
+	// 设置逻辑视图
+	// modelAndView.setViewName("itemEdit");
+
+	// 把商品数据放在模型中
+	model.addAttribute("item", item);
+
+	return "itemEdit";
+}
+
+```
+ModelMap返回数据
+
+ModelMap是Model接口的实现类，也可以通过ModelMap向页面传递数据
+
+使用Model和ModelMap的效果一样，如果直接使用Model，springmvc会实例化ModelMap。
+
+代码实现：
+```java
+/**
+ * 根据id查询商品,使用ModelMap
+ * 
+ * @param request
+ * @param model
+ * @return
+ */
+@RequestMapping("/itemEdit")
+public String queryItemById(HttpServletRequest request, ModelMap model) {
+	// 从request中获取请求参数
+	String strId = request.getParameter("id");
+	Integer id = Integer.valueOf(strId);
+
+	// 根据id查询商品数据
+	Item item = this.itemService.queryItemById(id);
+
+	// 把结果传递给页面
+	// ModelAndView modelAndView = new ModelAndView();
+	// 把商品数据放在模型中
+	// modelAndView.addObject("item", item);
+	// 设置逻辑视图
+	// modelAndView.setViewName("itemEdit");
+
+	// 把商品数据放在模型中
+	model.addAttribute("item", item);
+
+	return "itemEdit";
+```
+
+### 请求参数类型获取
+
+#### 获取简单数据类型
+
+当请求的参数名称和处理器形参名称一致时会将请求参数与形参进行绑定。
+这样，从Request取参数的方法就可以进一步简化。
+```java
+/**
+ * 根据id查询商品,绑定简单数据类型
+ * 
+ * @param id
+ * @param model
+ * @return
+ */
+@RequestMapping("/itemEdit")
+public String queryItemById(int id, ModelMap model) {
+	// 根据id查询商品数据
+	Item item = this.itemService.queryItemById(id);
+
+	// 把商品数据放在模型中
+	model.addAttribute("item", item);
+
+	return "itemEdit";
+}
+```
+
+#### 支持的数据类型
+参数类型推荐使用包装数据类型，因为基础数据类型不可以为null
+整形：Integer、int
+字符串：String
+单精度：Float、float
+双精度：Double、double
+布尔型：Boolean、boolean
+说明：对于布尔类型的参数，请求的参数值为true或false。或者1或0
+请求url：
+http://localhost:8080/xxx.action?id=2&status=false
+
+处理器方法：
+public String editItem(Model model,Integer id,Boolean status) 
+
+
+#### @RequestParam
+使用@RequestParam常用于处理简单类型的绑定。
+
+value：参数名字，即入参的请求参数名字，如value=“itemId”表示请求的参数	   区中的名字为itemId的参数的值将传入
+
+required：是否必须，默认是true，表示请求中一定要有相应的参数，否则将报错
+TTP Status 400 - Required Integer parameter 'XXXX' is not present
+
+defaultValue：默认值，表示如果请求中没有同名参数时的默认值
+
+定义如下：
+```java
+@RequestMapping("/itemEdit")
+public String queryItemById(@RequestParam(value = "itemId", required = true, defaultValue = "1") Integer id,
+		ModelMap modelMap) {
+	// 根据id查询商品数据
+	Item item = this.itemService.queryItemById(id);
+
+	// 把商品数据放在模型中
+	modelMap.addAttribute("item", item);
+
+	return "itemEdit";
+}
+```
 
 ### pojo类型
 
+#### 将页面修改后的商品信息保存到数据库中。
+
+请求的url：/updateItem.action
+参数：表单中的数据。
+响应内容：更新成功页面
+
+##### 使用pojo接收表单数据
+
+如果提交的参数很多，或者提交的表单中的内容很多的时候,可以使用简单类型接受数据,也可以使用pojo接收数据。
+要求：pojo对象中的属性名和表单中input的name属性一致。
+
+页面定义如下图：
+ 
+![15](image/Springmvc15.png)
+
+Pojo(逆向工程生成)如下图：
+
+![16](image/Springmvc16.png)
+
+##### ItemService接口
+
+```java
+/**
+ * 根据id更新商品
+ * 
+ * @param item
+ */
+void updateItemById(Item item);
+
+```
+
+##### ItemServiceImpl实现类
+
+ItemServiceImpl里实现接口方法
+使用updateByPrimaryKeySelective(item)方法，忽略空参数
+
+```java
+@Override
+public void updateItemById(Item item) {
+	this.itemMapper.updateByPrimaryKeySelective(item);
+}
+```
+
+##### ItemController
+
+```java
+/**
+ * 更新商品,绑定pojo类型
+ * 
+ * @param item
+ * @param model
+ * @return
+ */
+@RequestMapping("/updateItem")
+public String updateItem(Item item) {
+	// 调用服务更新商品
+	this.itemService.updateItemById(item);
+
+	// 返回逻辑视图
+	return "success";
+}
+
+```
+
+>注意：
+提交的表单中不要有日期类型的数据，否则会报400错误。如果想提交日期类型的数据需要用到后面的自定义参数绑定的内容。
+
+##### 编写success页面
+如下图创建success.jsp页面
+
+![17](image/Springmvc17.png) 
+
+页面代码：
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1>商品修改成功！</h1>
+
+</body>
+</html>
+
+```
+
+##### 6.3.8. 解决post乱码问题
+
+提交发现，保存成功，但是保存的是乱码
+在web.xml中加入：
+```xml
+	<!-- 解决post乱码问题 -->
+	<filter>
+		<filter-name>encoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<!-- 设置编码参是UTF8 -->
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+```
+以上可以解决post请求乱码问题。
+
+对于get请求中文参数出现乱码解决方法有两个：
+修改tomcat配置文件添加编码与工程编码一致，如下：
+```xml
+<Connector URIEncoding="utf-8" connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443"/>
+```
+另外一种方法对参数进行重新编码：
+```javaScript
+String userName new 
+String(request.getParamter("userName").getBytes("ISO8859-1"),"utf-8")
+```
+ISO8859-1是tomcat默认编码，需要将tomcat编码后的内容按utf-8编码
+
+
 ### pojo包装类型
+
+#### 使用包装的pojo接收商品信息的查询条件。
+包装对象定义如下：
+```java
+public class QueryVo {
+	private Item item;
+set/get。。。
+}
+```
+
+页面定义如下图：
+
+![18](image/Springmvc18.png)
+
+##### 接收查询条件
+
+```java
+	// 绑定包装数据类型
+	@RequestMapping("/queryItem")
+	public String queryItem(QueryVo queryVo) {
+		System.out.println(queryVo.getItem().getId());
+		System.out.println(queryVo.getItem().getName());
+
+		return "success";
+	}
+
+```
 
 ### 自定义参数类型
 
+#### 需求在商品修改页面可以修改商品的生产日期，并且根据业务需求自定义日期格式。
+
+由于日期数据有很多种格式，springmvc没办法把字符串转换成日期类型。所以需要自定义参数绑定。
+
+前端控制器接收到请求后，找到注解形式的处理器适配器，对RequestMapping标记的方法进行适配，并对方法中的形参进行参数绑定。可以在springmvc处理器适配器上自定义转换器Converter进行参数绑定。
+
+一般使用`<mvc:annotation-driven/>`注解驱动加载处理器适配器，可以在此标签上进行配置。
+
+#### 修改itemEdit.jsp
+如下图修改itemEdit.jsp页面，显示时间
+
+![19](image/Springmvc19.png)
+
+#### 自定义Converter
+
+```java
+//Converter<S, T>
+//S:source,需要转换的源的类型
+//T:target,需要转换的目标类型
+public class DateConverter implements Converter<String, Date> {
+
+	@Override
+	public Date convert(String source) {
+		try {
+			// 把字符串转换为日期类型
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
+			Date date = simpleDateFormat.parse(source);
+
+			return date;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// 如果转换异常则返回空
+		return null;
+	}
+}
+
+```
+
+#### 配置Converter
+
+我们同时可以配置多个的转换器。
+类似下图的usb设备，可以接入多个usb设备
+ 
+![20](image/Springmvc20.png)
+
+```xml
+<!-- 配置注解驱动 -->
+<!-- 如果配置此标签,可以不用配置... -->
+<mvc:annotation-driven conversion-service="conversionService" />
+
+<!-- 转换器配置 -->
+<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	<property name="converters">
+		<set>
+			<bean class="cn.itcast.springmvc.converter.DateConverter" />
+		</set>
+	</property>
+</bean>
+```
+
+#### 配置方式2（了解）
+
+```xml
+<!--注解适配器 -->
+<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+	<property name="webBindingInitializer" ref="customBinder"></property>
+</bean>
+
+<!-- 自定义webBinder -->
+<bean id="customBinder" class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+	<property name="conversionService" ref="conversionService" />
+</bean>
+
+<!-- 转换器配置 -->
+<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	<property name="converters">
+		<set>
+			<bean class="cn.itcast.springmvc.convert.DateConverter" />
+		</set>
+	</property>
+</bean>
+```
+
+>注意：此方法需要独立配置处理器映射器、适配器，
+不再使用`<mvc:annotation-driven/>`
+
+
+
 ## SpringMVC和Struts2的区别
+
+1.	springmvc的入口是一个servlet即前端控制器，而struts2入口是一个filter过滤器。
+2.	springmvc是基于方法开发(一个url对应一个方法)，请求参数传递到方法的形参，可以设计为单例或多例(建议单例)，struts2是基于类开发，传递参数是通过类的属性，只能设计为多例。
+3.	Struts采用值栈存储请求和响应的数据，通过OGNL存取数据， springmvc通过参数解析器是将request请求内容解析，并给方法形参赋值，将数据和视图封装成ModelAndView对象，最后又将ModelAndView中的模型数据通过request域传输到页面。Jsp视图解析器默认使用jstl。
 
 
 ## 高级参数绑定
