@@ -1,24 +1,67 @@
-- [config 配置指令](#config-配置指令)
-  - [查看系统config](#查看系统config)
-  - [查看当前用户（global）配置](#查看当前用户global配置)
-  - [查看当前仓库配置信息](#查看当前仓库配置信息)
-- [修改commit 的注释](#修改commit-的注释)
-  - [修改最近一次](#修改最近一次)
-  - [修改过去的](#修改过去的)
-- [指定的提交向其他的分支marge](#指定的提交向其他的分支marge)
-- [指定的多个commit向某个分支去合](#指定的多个commit向某个分支去合)
-- [恢复误删的分支](#恢复误删的分支)
-- [Xcode里Pod工程不自动提示解决方案](#xcode里pod工程不自动提示解决方案)
-- [iOS工程配置git忽略文件(.gitignore)](#ios工程配置git忽略文件gitignore)
-  - [.gitignore无效解决办法](#gitignore无效解决办法)
+- [git](#git)
+  - [新建一个本地分支：](#新建一个本地分支)
+  - [把新建的本地分支push到远程服务器，远程分支与本地分支同名（当然可以随意起名）](#把新建的本地分支push到远程服务器远程分支与本地分支同名当然可以随意起名)
+  - [查看所有分支(包括远程的分支)](#查看所有分支包括远程的分支)
+  - [删除远程分支](#删除远程分支)
+  - [config 配置指令](#config-配置指令)
+    - [查看系统config](#查看系统config)
+    - [查看当前用户（global）配置](#查看当前用户global配置)
+    - [查看当前仓库配置信息](#查看当前仓库配置信息)
+  - [修改commit 的注释](#修改commit-的注释)
+    - [修改最近一次](#修改最近一次)
+    - [修改过去的](#修改过去的)
+  - [指定的提交向其他的分支marge](#指定的提交向其他的分支marge)
+  - [指定的多个commit向某个分支去合](#指定的多个commit向某个分支去合)
+  - [恢复误删的分支](#恢复误删的分支)
+  - [Xcode里Pod工程不自动提示解决方案](#xcode里pod工程不自动提示解决方案)
+  - [iOS工程配置git忽略文件(.gitignore)](#ios工程配置git忽略文件gitignore)
+    - [.gitignore无效解决办法](#gitignore无效解决办法)
+# git
+
+## 新建一个本地分支：
+
+```shell
+$ git checkout -b dbg_star
+```
+
+查看一下现在的分支状态:
+```shell
+$ git branch
+* dbg_star
+  master
+  release
+```
+星号(*)表示当前所在分支。现在的状态是成功创建的新的分支并且已经切换到新分支上。
+
+
+## 把新建的本地分支push到远程服务器，远程分支与本地分支同名（当然可以随意起名）
+
+```
+$ git push origin dbg_remote_star:dbg_star
+
+```
+
+## 查看所有分支(包括远程的分支)
+
+使用git branch -a查看所有分支，会看到remotes/origin/dbg_lichen_star这个远程分支，说明新建远程分支成功。
+
+## 删除远程分支
+
+我比较喜欢的简单方式，推送一个空分支到远程分支，其实就相当于删除远程分支：
+```shell
+$ git push origin :dbg_lichen_star
+```
+也可以使用：
+```
+$ git push origin --delete dbg_lichen_star
+```
+这两种方式都可以删除指定的远程分支
 
 ## config 配置指令
 
 ```shell
 git config
 ```
-
-　　
 
 config 配置有system级别 global（用户级别） 和local（当前仓库）三个 设置先从system-》global-》local  底层配置会覆盖顶层配置 分别使用--system/global/local 可以定位到配置文件
 

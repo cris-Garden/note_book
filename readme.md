@@ -10,7 +10,7 @@
 
 # 版本管理
 [git和Cocopods](./github/git.md)
-
+[Mac配置shh登陆github](./github/macsshlogin.md)
 # 设计网站
 [输入文字即可生产logo](https://www.logaster.cn)
 

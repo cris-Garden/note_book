@@ -100,12 +100,12 @@
 		- [请求方法限定](#请求方法限定)
 	- [controller返回值](#controller返回值)
 		- [返回ModelAndView](#返回modelandview)
-		- [返回void](#返回void)
+		- [返回void（不跳转视图如AJAX请求）](#返回void不跳转视图如ajax请求)
 			- [使用request转发页面](#使用request转发页面)
 			- [可以通过response页面重定向](#可以通过response页面重定向)
 			- [可以通过response指定响应结果，例如响应json数据如下：](#可以通过response指定响应结果例如响应json数据如下)
 			- [代码演示](#代码演示)
-		- [返回字符串](#返回字符串)
+		- [返回字符串(官方推荐使用，符合解偶思想，符合数据和路径分开)](#返回字符串官方推荐使用符合解偶思想符合数据和路径分开)
 			- [逻辑视图名](#逻辑视图名)
 			- [Redirect重定向](#redirect重定向)
 			- [forward转发](#forward转发)
@@ -1288,6 +1288,10 @@ ISO8859-1是tomcat默认编码，需要将tomcat编码后的内容按utf-8编码
 
 ### pojo包装参数类型
 
+pojo包装类型和包装类的名字没有关系，只喝包装类内部的属性的名字有关系。属性名字需要和form的name一一对应。
+
+
+
 #### 使用包装的pojo接收商品信息的查询条件。
 包装对象定义如下：
 ```java
@@ -1518,6 +1522,8 @@ public String queryItem(QueryVo queryVo, Integer[] ids) {
 
 #### 定义包装pojo
 
+list参数必须使用包装类来接受。
+
 List中存放对象，并将定义的List放在包装类QueryVo中
 
 使用包装pojo对象接收，如下图：
@@ -1650,7 +1656,7 @@ controller方法中定义ModelAndView对象并返回，对象中可添加model�
 
 参考第一天的内容
 
-### 返回void
+### 返回void（不跳转视图如AJAX请求）
 
 在Controller方法形参上可以定义request和response，使用request或response指定响应结果：
 
@@ -1693,9 +1699,13 @@ public void queryItem(HttpServletRequest request, HttpServletResponse response) 
 	response.getWriter().print("{\"abc\":123}");
 }
 ```
-### 返回字符串
+### 返回字符串(官方推荐使用，符合解偶思想，符合数据和路径分开)
+
+通过字符串返回路径，通过model或者modelmap来带数据。
+
 
 #### 逻辑视图名
+
 controller方法返回字符串可以指定逻辑视图名，通过视图解析器解析为物理视图地址。
 ```java
 //指定逻辑视图名，经过视图解析器解析为jsp物理路径：/WEB-INF/jsp/itemList.jsp
