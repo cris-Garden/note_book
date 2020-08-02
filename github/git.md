@@ -7,6 +7,10 @@
     - [查看系统config](#查看系统config)
     - [查看当前用户（global）配置](#查看当前用户global配置)
     - [查看当前仓库配置信息](#查看当前仓库配置信息)
+    - [增](#增)
+    - [删](#删)
+    - [改](#改)
+    - [查](#查)
   - [修改commit 的注释](#修改commit-的注释)
     - [修改最近一次](#修改最近一次)
     - [修改过去的](#修改过去的)
@@ -91,6 +95,30 @@ git config --local --list
 
 ```shell
 git config --global user.name "myname"git config --global user.email "test@gmail.com"
+```
+
+### 增
+
+```
+git config --global --add configName configValue
+```
+
+### 删
+
+```
+git config  --global --unset configName   (只针对存在唯一值的情况)
+```
+
+### 改
+
+```
+git config --global configName configValue
+```
+
+### 查
+
+```
+git config --global configName
 ```
 
 ##  修改commit 的注释

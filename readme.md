@@ -48,3 +48,6 @@
 # 搭建github网站
 
 [阿里攻略](https://developer.aliyun.com/article/331168)
+[Jekyll的中文文档](https://www.jekyll.com.cn)
+[如何创建主题](http://jokinkuang.github.io/2016/09/03/how-to-create-the-jekyll-theme.html)
+[主题下载网站](http://jekyllthemes.org/themes/wu-kan/)
