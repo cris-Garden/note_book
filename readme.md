@@ -6,7 +6,9 @@
 
 [dart构造函数详解](./dart/dart构造函数.md)
 # flutter
+[flutter知识点整理]()
 [flutter笔记大集合](./flutter/flutter.md)
+
 
 # 版本管理
 
@@ -45,9 +47,22 @@
 
 [springMVC笔记](springmvc.md)
 
+# 英语
+
+[51talk日记](english/51talk.md)
+
+# 日语
+
+[日本村日记](japanese/nihonmura.md)
+
+
 # 搭建github网站
 
 [阿里攻略](https://developer.aliyun.com/article/331168)
+
 [Jekyll的中文文档](https://www.jekyll.com.cn)
+
 [如何创建主题](http://jokinkuang.github.io/2016/09/03/how-to-create-the-jekyll-theme.html)
+
 [主题下载网站](http://jekyllthemes.org/themes/wu-kan/)
+
