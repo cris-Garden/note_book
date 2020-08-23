@@ -7,7 +7,7 @@
 - [安卓](#安卓)
 - [PYTHON](#python)
 - [Mysql](#mysql)
-- [eclips](#eclips)
+- [IDE设置相关和快捷键](#ide设置相关和快捷键)
 - [mybatis](#mybatis)
 - [Spring](#spring)
 - [SpringMVC](#springmvc)
@@ -53,9 +53,10 @@
 [sql笔记](./Mysql/sql.md)
 
 
-# eclips
+# IDE设置相关和快捷键
 
 [eclips tips](eclipse.md)
+[Mac快捷键盘](shortkey/Mac.md)
 
 # mybatis
 

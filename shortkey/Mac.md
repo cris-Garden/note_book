@@ -1,4 +1,11 @@
+- [Mac](#mac)
+  - [如何打出 \  Option + "¥"](#如何打出--option--)
+  - [Safari](#safari)
+  - [Terminal](#terminal)
+
 # Mac
+
+## 如何打出 \  Option + "¥"
 
 ## Safari
 
