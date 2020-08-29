@@ -48,6 +48,8 @@
 
 [anaconda的使用例子](python/anaconda.md)
 
+[python爬虫](python/爬虫.md)
+
 # Mysql
 
 [sql笔记](./Mysql/sql.md)
