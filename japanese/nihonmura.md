@@ -387,5 +387,32 @@
 
 推薦 すいせん
 
-<ruby><rb>以前</rb><rt>いぜん</rt></ruby><ruby><rb>就職</rb><rt>しゅーしょく</rt></ruby>した<ruby><rb>会社</rb><rt>かいしゃ</rt></ruby>に<ruby><rb>内定</rb><rt>ないてー</rt></ruby>もらったらその<ruby><rb>翌週</rb><rt>よくしゅー</rt></ruby>に<ruby><rb>働</rb><rt>はたら</rt></ruby>くことになる○○<ruby><rb>会社</rb><rt>かいしゃ</rt></ruby>に<ruby><rb>面談</rb><rt>めんだん</rt></ruby>に<ruby><rb>行</rb><rt>い</rt></ruby>きましょうと<ruby><rb>言</rb><rt>い</rt></ruby>われたそんなこと<ruby><rb>面接</rb><rt>めんせつ</rt></ruby>では<ruby><rb>言</rb><rt>い</rt></ruby>われなかったし、<ruby><rb>結局</rb><rt>けっきょく</rt></ruby><ruby><rb>派遣</rb><rt>はけん</rt></ruby>じゃんと<ruby><rb>思</rb><rt>おも</rt></ruby>った、<ruby><rb>客先</rb><rt>きゃくさき</rt></ruby><ruby><rb>相手</rb><rt>あいて</rt></ruby>に<ruby><rb>文句</rb><rt>もんく</rt></ruby>を<ruby><rb>言</rb><rt>い</rt></ruby>えずにペコペコ<ruby><rb>頭</rb><rt>あたま</rt></ruby>を<ruby><rb>下</rb><rt>さ</rt></ruby>げるのが<ruby><rb>嫌</rb><rt>いや</rt></ruby>で<ruby><rb>派遣</rb><rt>はけん</rt></ruby><ruby><rb>辞</rb><rt>や</rt></ruby>めたのにと、<ruby><rb>結局</rb><rt>けっきょく</rt></ruby>そこに<ruby><rb>入</rb><rt>はい</rt></ruby>るためにも<ruby><rb>経歴</rb><rt>けーれき</rt></ruby>に<ruby><rb>嘘</rb><rt>うそ</rt></ruby>を<ruby><rb>盛</rb><rt>も</rt></ruby>り<ruby><rb>込</rb><rt>こ</rt></ruby>んでたな、<ruby><rb>自分</rb><rt>じぶん</rt></ruby><ruby><rb>以降</rb><rt>いこー</rt></ruby>に<ruby><rb>入</rb><rt>はい</rt></ruby>った<ruby><rb>方</rb><rt>ほー</rt></ruby>はもっと<ruby><rb>経歴</rb><rt>けーれき</rt></ruby>に<ruby><rb>嘘</rb><rt>うそ</rt></ruby>を<ruby><rb>盛</rb><rt>も</rt></ruby>り<ruby><rb>込</rb><rt>こ</rt></ruby>まれたみたいだけどほんと<ruby><rb>酷</rb><rt>ひど</rt></ruby>かった<ruby><rb>最初</rb><rt>さいしょ</rt></ruby>は<ruby><rb>自社</rb><rt>じしゃ</rt></ruby>からも<ruby><rb>営業</rb><rt>えーぎょー</rt></ruby>が<ruby><rb>様子</rb><rt>よーす</rt></ruby>を<ruby><rb>見</rb><rt>み</rt></ruby>に<ruby><rb>来</rb><rt>く</rt></ruby>るけど<ruby><rb>半年</rb><rt>はんとし</rt></ruby>たらずで<ruby><rb>来</rb><rt>こ</rt></ruby>なくなったし<ruby><rb>人売</rb><rt>ひとう</rt></ruby>り<ruby><rb>企業</rb><rt>きぎょー</rt></ruby>は<ruby><rb>人</rb><rt>ひと</rt></ruby>を<ruby><rb>大切</rb><rt>たいせつ</rt></ruby>にしないんだろうね
+あっと言う間に終わります
+
+思い出に残っている旅行
+
+日の出
+
+ケーブルカー
+
+いっぱくふつか
+
+ごうかりょこう
+
+豪華旅行
+
+おおかみ
+
+狼
+
+都市
+
+とし
+
+ぜいたく
+
+賭け事
+
+かけごと
+
 

@@ -1,3 +1,8 @@
+- [查看文档](#查看文档)
+- [网络爬虫](#网络爬虫)
+- [3.xpython urllib和cookie的使用](#3xpython-urllib和cookie的使用)
+- [安装补充库](#安装补充库)
+  - [终端进入anaconda的python环境](#终端进入anaconda的python环境)
 - [对象转json](#对象转json)
 - [Numpy](#numpy)
 - [Pandas](#pandas)
@@ -30,6 +35,62 @@
 - [Matplotlib](#matplotlib)
 - [Seaborn](#seaborn)
 
+# 查看文档
+
+[文档](pythondocument.md)
+
+# 网络爬虫
+
+[爬虫1:如何读取网络请求](爬虫.md)
+
+[爬虫2:bs4如何使用解析器](爬虫2.md)
+
+# 3.xpython urllib和cookie的使用
+python2.0版本导入cookielib直接import cookielib
+
+python 3.6 改成 http.cookiejar了，所以只要改成from http import cookiejar就自动导入cookiejar了，如果还是不行，就把所有的.pyc删掉试试。
+```python
+
+import urllib.parse
+import urllib.request
+from http import cookiejar
+ 
+ 
+#通过cookieJar（）类构建一个cookieJar（）对象，用来保存cookie的值
+ 
+cookie = cookiejar.CookieJar()
+ 
+#通过HTTPCookieProcessor（）处理器类构建一个处理器对象，用来处理cookie
+#参数就是构建的CookieJar（）对象
+cookie_handler = urllib.request.HTTPCookieProcessor(cookie)
+ 
+#构建一个自定义的opener
+opener = urllib.request.build_opener(cookie_handler)
+ 
+#通过自定义opener的addheaders的参数，可以添加HTTP报头参数
+opener.addhandlers = [("User-Agent", "Opera/9.80 (Windows NT 6.1; U; zh-cn) Presto/2.9.168 Version/11.50")]
+#人人网的登陆接口
+url = "http://www.renren.com/"
+#需要登陆的账户密码
+data = {"email" : "xxxxxx", "password":"xxxxx"}
+#通过URL encode（）编码转换
+data =urllib.parse.urlencode(data).encode("utf-8")
+ 
+request = urllib.request.Request(url,data=data)
+ 
+response = opener.open(request
+```
+
+# 安装补充库
+
+## 终端进入anaconda的python环境
+```
+conda activate py27
+```
+然后可以通过,列出已经安装的库
+```
+pip freeze -l
+```
 # 对象转json
 
 [参考](对象转json.md)

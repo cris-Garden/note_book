@@ -94,5 +94,6 @@
 
 # 广告联盟
 
+[广告配置](ad/admod.md)
 
-
+[admod添加顺序](admod.md)
