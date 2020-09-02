@@ -34,3 +34,7 @@
 
 二、如果不想改为旧的build方式的话，那就需要删除重复的文件路径。在Build Phases 里面进行搜索，并删除重复的。主要是copy bundle resource 里面出现了相同名称的文件。我是因为我这边构建了两个targets，而两个targets的copy bundle resource出现了相同的文件，两边删除一边即可，不过要根据项目情况而进行删除。
 
+
+# App.framework does not support the minimum OS Version specified in the Info.plist
+
+After doing a flutter clean, changing MinimumOSVersion (inside /ios/Flutter/AppframeworkInfo.plist) to 9.0, iOS Deployment Target (inside project runner) to 9.0 and iOS Deployment Target (inside target runner) to 9.0 the error disappeared.
