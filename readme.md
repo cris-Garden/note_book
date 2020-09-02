@@ -58,7 +58,10 @@
 # IDE设置相关和快捷键
 
 [eclips tips](eclipse.md)
+
 [Mac快捷键盘](shortkey/Mac.md)
+
+[androidStudio的bug集合](IDE/androidStudio.md)
 
 # mybatis
 
