@@ -15,6 +15,7 @@
 - [日语](#日语)
 - [搭建github网站](#搭建github网站)
 - [广告联盟](#广告联盟)
+- [google AI](#google-ai)
 
 # MarkDown入门教学
 [MarkDown中文文档](http://xianbai.me/learn-md/article/syntax/blockquotes.html)
@@ -100,3 +101,8 @@
 [广告配置](ad/admod.md)
 
 [admod添加顺序](admod.md)
+
+
+# google AI
+
+[谷歌ai相关](ai/google.md)
