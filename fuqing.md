@@ -40,7 +40,8 @@ https://www.sohu.com/a/329941327_120047302
 ![1](image/fuxi23.jpg)
 ![1](image/fuxi24.jpg)
 
-実家の海
+# 実家の海
+
 ![1](image/fuxi04.jpg)
 ![1](image/fuxi07.jpg)
 ![1](image/fuxi18.png)
@@ -48,12 +49,50 @@ https://www.sohu.com/a/329941327_120047302
 
 
 
-実家の宗廟
+# 実家の宗廟
+
 祖先﹝そせん﹞を祭る﹝まつる﹞所﹝ところ﹞.宗廟﹝そうびょう﹞.
 ![1](image/fuxi02.jpg)
 
 
-[福清の石竹山](https://www.tripadvisor.jp/Attraction_Review-g657954-d1851038-Reviews-Shizhu_Mountain-Fuqing_Fujian.html)
+# 三明学院
+
+<ruby>繁華<rt>はんか</rt></ruby>
+
+
+![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599575272859&di=d8b7e73e349bc7c7e9488a9f6cb5a617&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171228%2Fd0b6085945784ee282c00e8cc694dc08.jpeg)
+
+![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599575272859&di=7bf319d53ebd016294874549c088c77d&imgtype=0&src=http%3A%2F%2Ffilestore.plan.51xuanxiao.com%2Fresources%2FchinaUniversityImage%2F593%2Fp00059386_20160602113704.jpeg)
+
+![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599575272859&di=0b8e6b770ec247001b016cadab88dbd6&imgtype=0&src=http%3A%2F%2Fwww.fanshuxueyuan.com%2FColleges%2Fimagefile%2F2364%2F528147c30c067646242b737198a2426f.jpg)
+
+![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599575272858&di=da4a106c2c7af46efca37e577b95f214&imgtype=0&src=http%3A%2F%2Fimg.gaokaozy.cn%2Fschool%2Fphoto%2F3%2F58d71ddda0540.jpg)
+
+![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599575272857&di=bce225e341ca23af726e637ef809f330&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180913%2F967d11640e4442a0a863473905bcea56.jpeg)
+
+![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599575272856&di=08f578e68997cc498449bf532b9f7109&imgtype=0&src=http%3A%2F%2Fimg.gaokaozy.cn%2Fschool%2Fphoto%2F3%2F58d71de0b4c9c.jpg)
+
+![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599575272852&di=bde895ea330788793b72c9523433a904&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn17%2F521%2Fw800h521%2F20180627%2Fff99-hencxtv2817307.jpg)
+
+![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599575411391&di=3d7085a71e5299952910a567fdf60c63&imgtype=0&src=http%3A%2F%2Fimg.liexue.cn%2Fuploadfile%2F2014%2F0904%2F20140904101747934.jpg)
+
+![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599575411389&di=713313800bbc44fa1352851e76364bb2&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn17%2F533%2Fw800h533%2F20180627%2F9e89-hencxtv2816664.jpg)
+
+![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599575411389&di=bb1958b5d055fbf3aa9aef813ebccbf8&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20190704%2F600dc1affc0a467da760038d6c0e38ac.jpeg)
+
+![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599575411389&di=bb1958b5d055fbf3aa9aef813ebccbf8&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20190704%2F600dc1affc0a467da760038d6c0e38ac.jpeg)
+
+![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599575749046&di=7231c3ddf136a9308e55e8989087a47e&imgtype=0&src=http%3A%2F%2Fimg1.youzy.cn%2Fcontent%2Fmedia%2Fthumbs%2Fp00059340.jpeg)
+
+![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599575749045&di=c2338f7024b2b54098ae0b3f096fdd13&imgtype=0&src=http%3A%2F%2Fimg.mp.sohu.com%2Fupload%2F20170629%2Fb8f423d055934d988e6cb08b57dd0115_th.png)
+
+![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599576138336&di=926779b2d0a625e316da4169dfd43cc7&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F2f738bd4b31c8701a9468d77267f9e2f0608ffaa.jpg)
+
+
+
+
+
+# [福清の石竹山](https://www.tripadvisor.jp/Attraction_Review-g657954-d1851038-Reviews-Shizhu_Mountain-Fuqing_Fujian.html)
 
 ![1](image/fuxi11.jpg)
 
@@ -68,7 +107,7 @@ https://www.sohu.com/a/329941327_120047302
 
 
 
-[福州の鼓山](https://www.tripadvisor.jp/Attraction_Review-g297405-d561401-Reviews-Drum_Mountain_Gu_Shan-Fuzhou_Fujian.html)
+# [福州の鼓山](https://www.tripadvisor.jp/Attraction_Review-g297405-d561401-Reviews-Drum_Mountain_Gu_Shan-Fuzhou_Fujian.html)
 
 ![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599491448315&di=8c519f40f69a2e617df7edb8c1d8217c&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201211%2F13%2F143024328zv3va7ziibw7a.jpg)
 ![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599491487127&di=555042174550fdcc8e6bbcfe0741b434&imgtype=0&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D3486572225%2C114106186%26fm%3D214%26gp%3D0.jpg)
@@ -82,7 +121,7 @@ https://www.sohu.com/a/329941327_120047302
 ![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599491560069&di=2983372a97c4698cb30f83884d38c68d&imgtype=0&src=http%3A%2F%2Fcdn.moji002.com%2Fimages%2Fsimgs%2F2017%2F04%2F29%2F14934202060.73261500.1840_android.jpg)
 
 
-[福州の三坊七巷](https://www.tripadvisor.jp/Attraction_Review-g297405-d1851046-Reviews-Architectural_buildings_of_Sanfang_Qixiang_and_Zhuzi_Workshop-Fuzhou_Fujian.html)
+# [福州の三坊七巷](https://www.tripadvisor.jp/Attraction_Review-g297405-d1851046-Reviews-Architectural_buildings_of_Sanfang_Qixiang_and_Zhuzi_Workshop-Fuzhou_Fujian.html)
 
 ![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599491772472&di=8e1e5ab4305e405b015ca84835c0b31e&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fd%2F53c7354766c5f.jpg)
 ![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599491772472&di=f46a1fef715e0a10694c416558a521eb&imgtype=0&src=http%3A%2F%2Fdimg08.c-ctrip.com%2Fimages%2F1004070000002sngx6B9E_C_671_10000_Q90.jpg)
@@ -94,7 +133,7 @@ https://www.sohu.com/a/329941327_120047302
 
 
 
-[福州の西湖公园](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599491560069&di=2983372a97c4698cb30f83884d38c68d&imgtype=0&src=http%3A%2F%2Fcdn.moji002.com%2Fimages%2Fsimgs%2F2017%2F04%2F29%2F14934202060.73261500.1840_android.jpg)
+# [福州の西湖公园](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599491560069&di=2983372a97c4698cb30f83884d38c68d&imgtype=0&src=http%3A%2F%2Fcdn.moji002.com%2Fimages%2Fsimgs%2F2017%2F04%2F29%2F14934202060.73261500.1840_android.jpg)
 
 ![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599491895691&di=41ed34f70bcadced2f2714592c0d5909&imgtype=0&src=http%3A%2F%2Fbbs-fd.zol-img.com.cn%2Ft_s1200x5000%2Fg4%2FM05%2F0E%2F07%2FCg-4WVIRzwqIHWhEABBzsPgG9fQAAK4-wHGy3cAEHPI478.jpg)
 ![1](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599491895691&di=c6f04416adb42ee365cce34051e0522d&imgtype=0&src=http%3A%2F%2Fp2-q.mafengwo.net%2Fs12%2FM00%2F2F%2F09%2FwKgED1vaxZGAJz0BAAx1qFTfM_g78.jpeg%3FimageMogr2%2Fstrip)
