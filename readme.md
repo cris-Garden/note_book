@@ -106,3 +106,7 @@
 # google AI
 
 [谷歌ai相关](ai/google.md)
+
+[语音文字转化](ai/语音文字转化.md)
+
+[python MP3 裁剪](python/mp3cut.md)
