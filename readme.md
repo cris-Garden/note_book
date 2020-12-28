@@ -14,6 +14,7 @@
 - [英语](#英语)
 - [日语](#日语)
 - [搭建github网站](#搭建github网站)
+- [SpringBoot](#springboot)
 - [广告联盟](#广告联盟)
 - [google AI](#google-ai)
 
@@ -29,6 +30,8 @@
 [flutter知识点整理]()
 
 [flutter笔记大集合](./flutter/flutter.md)
+
+[flutter创建自己的第三方库](./flutter/自定义第三方库.md)
 
 
 # 版本管理
@@ -50,6 +53,8 @@
 [anaconda的使用例子](python/anaconda.md)
 
 [python爬虫](python/爬虫.md)
+
+[python 常用函数和功能](python/pythondocument.md)
 
 # Mysql
 
@@ -95,6 +100,9 @@
 
 [主题下载网站](http://jekyllthemes.org/themes/wu-kan/)
 
+# SpringBoot
+
+[命令行创建SpringBoot](./springboot/命令行创建springboot.md)
 
 # 广告联盟
 
