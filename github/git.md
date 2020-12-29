@@ -1,4 +1,9 @@
 - [git](#git)
+  - [git提交大文件](#git提交大文件)
+    - [安装git-lfs](#安装git-lfs)
+    - [把大文件的状态返回](#把大文件的状态返回)
+    - [再次提交](#再次提交)
+    - [push提交](#push提交)
   - [新建一个本地分支：](#新建一个本地分支)
   - [把新建的本地分支push到远程服务器，远程分支与本地分支同名（当然可以随意起名）](#把新建的本地分支push到远程服务器远程分支与本地分支同名当然可以随意起名)
   - [查看所有分支(包括远程的分支)](#查看所有分支包括远程的分支)
@@ -21,6 +26,37 @@
   - [iOS工程配置git忽略文件(.gitignore)](#ios工程配置git忽略文件gitignore)
     - [.gitignore无效解决办法](#gitignore无效解决办法)
 # git
+
+## git提交大文件
+
+### 安装git-lfs
+
+```shell
+brew install git-lfs
+```
+### 把大文件的状态返回
+```shell
+$ cd {REPO}
+$ git reset --soft HEAD^
+```
+
+### 再次提交
+```shell
+$ cd {REPO}
+$ git lfs track {LARGE_FILE}            # {LARGE_FILE} を登録
+Tracking {LARGE_FILE}
+$ git add .gitattributes  
+$ git add {LARGE_FILE}                  # 通常のadd
+$ git commit -m 'I added {LARGE_FILE}.' # 通常のcommit
+```
+
+### push提交
+``````
+
+```
+$ cd {REPO}
+$ git push origin master
+```
 
 ## 新建一个本地分支：
 

@@ -1,5 +1,6 @@
 
 - [MarkDown入门教学](#markdown入门教学)
+- [Mac](#mac)
 - [dart](#dart)
 - [flutter](#flutter)
 - [版本管理](#版本管理)
@@ -17,9 +18,13 @@
 - [SpringBoot](#springboot)
 - [广告联盟](#广告联盟)
 - [google AI](#google-ai)
+- [Linux](#linux)
 
 # MarkDown入门教学
 [MarkDown中文文档](http://xianbai.me/learn-md/article/syntax/blockquotes.html)
+
+# Mac
+[mac打印目录的树形结构](./note.md)
 
 # dart
 [dart语法](./dart/readme.md)
@@ -104,6 +109,8 @@
 
 [命令行创建SpringBoot](./springboot/命令行创建springboot.md)
 
+[SpringBoot - 配置文件application.yml使用详解](springboot/springsetting.md)
+
 # 广告联盟
 
 [广告配置](ad/admod.md)
@@ -118,3 +125,6 @@
 [语音文字转化](ai/语音文字转化.md)
 
 [python MP3 裁剪](python/mp3cut.md)
+
+# Linux
+[centos安装java环境](linux/centos.md)

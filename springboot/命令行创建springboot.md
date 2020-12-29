@@ -1,3 +1,4 @@
+- [java查看本地的Java露肩](#java查看本地的java露肩)
 - [创建Gradle工程](#创建gradle工程)
   - [使用Gradle Wrapper](#使用gradle-wrapper)
   - [添加Spring Boot依赖](#添加spring-boot依赖)
@@ -11,10 +12,15 @@
   - [mac 关闭指定端口](#mac-关闭指定端口)
 
 
+
 用Gradle构建Spring Boot项目
 相比起Maven的XML配置方式，Gradle提供了一套简明的DSL用于构建Java项目，使我们就像编写程序一样编写项目构建脚本。本文将从无到有创建一个用Gradle构建的Spring Boot项目，并在此过程中讲到Gradle的一些典型用法。
 
+# java查看本地的Java露肩
 
+```S
+/usr/libexec/java_home -V
+```
 
 本文Github代码：https://github.com/davenkin/gradle-spring-boot.git
 
