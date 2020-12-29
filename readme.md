@@ -128,3 +128,5 @@
 
 # Linux
 [centos安装java环境](linux/centos.md)
+
+[nginx](linux/ngnixsetting.md)
