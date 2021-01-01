@@ -109,6 +109,8 @@
 
 [命令行创建SpringBoot](./springboot/命令行创建springboot.md)
 
+[如何分离第三方包配置文件和jar包](springboot/jar包和配置文件第三方包分离.md)
+
 [SpringBoot - 配置文件application.yml使用详解](springboot/springsetting.md)
 
 # 广告联盟

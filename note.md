@@ -1,4 +1,147 @@
+- [Mac开发技巧](#mac开发技巧)
+  - [Mac brew 常用命令](#mac-brew-常用命令)
+    - [安装多个go语言版本并切换](#安装多个go语言版本并切换)
+    - [查看brew的帮助](#查看brew的帮助)
+    - [安装软件](#安装软件)
+    - [卸载软件](#卸载软件)
+    - [搜索软件](#搜索软件)
+    - [显示已经安装软件列表](#显示已经安装软件列表)
+    - [更新软件，把所有的Formula目录更新，并且会对本机已经安装并有更新的软件用*标明。](#更新软件把所有的formula目录更新并且会对本机已经安装并有更新的软件用标明)
+    - [更新某具体软件](#更新某具体软件)
+    - [显示软件内容信息](#显示软件内容信息)
+    - [用浏览器打开](#用浏览器打开)
+    - [显示包依赖](#显示包依赖)
+    - [显示包的依赖树](#显示包的依赖树)
+    - [启动web服务器，可以通过浏览器访问http://localhost:4567/ 来同网页来管理包](#启动web服务器可以通过浏览器访问httplocalhost4567-来同网页来管理包)
+    - [删除程序，和upgrade一样，单个软件删除和所有程序老版删除。](#删除程序和upgrade一样单个软件删除和所有程序老版删除)
+    - [查看那些已安装的程序需要更新](#查看那些已安装的程序需要更新)
+  - [查看端口占用](#查看端口占用)
+  - [杀死进程](#杀死进程)
+  - [打印目录的树形结构](#打印目录的树形结构)
+
 # Mac开发技巧
+
+## Mac brew 常用命令
+
+
+### 安装多个go语言版本并切换
+```python
+$ brew install go 
+$ brew install go@1.10
+$ brew install go@1.9
+$ brew install go@1.8
+ 
+# 然后把 go@1.10/go@1.9/go@1.8安装目录下的文件移动或者复制到go目录下 ，通过 brew switch go [version]切换版本
+# 切换版本语法 brew switch <formula> <version>
+ 
+# 移动其他版本目录示例
+MacBookPro:go mac$ pwd
+/usr/local/Cellar/go
+MacBookPro:go mac$ ls
+1.10.3  1.11.2  1.11.4
+MacBookPro:go mac$ cd ../go@1.10
+MacBookPro:go@1.10 mac$ ls
+1.10.7
+MacBookPro:go@1.10 mac$ mv 1.10.7/ ../go/
+ 
+# 把其他多个版本移动到go默认目录后，查看当前目录下有哪些go版本
+MacBookPro:go mac$ ls
+1.10.3  1.10.7  1.11.2  1.11.4  1.8.7   1.9.7
+ 
+# 切换版本并查看 切换到go 1.9.7
+MacBookPro:go mac$ brew switch go 1.9.7
+Cleaning /usr/local/Cellar/go/1.9.7
+Cleaning /usr/local/Cellar/go/1.10.3
+Cleaning /usr/local/Cellar/go/1.11.2
+Cleaning /usr/local/Cellar/go/1.11.4
+Cleaning /usr/local/Cellar/go/1.10.7
+Cleaning /usr/local/Cellar/go/1.8.7
+3 links created for /usr/local/Cellar/go/1.9.7
+MacBookPro:go mac$ go version
+go version go1.9.7 darwin/amd64
+ 
+# 切换版本并查看 切换到go 1.10.7
+MacBookPro:go mac$ brew switch go 1.10.7
+Cleaning /usr/local/Cellar/go/1.9.7
+Cleaning /usr/local/Cellar/go/1.10.3
+Cleaning /usr/local/Cellar/go/1.11.2
+Cleaning /usr/local/Cellar/go/1.11.4
+Cleaning /usr/local/Cellar/go/1.10.7
+Cleaning /usr/local/Cellar/go/1.8.7
+3 links created for /usr/local/Cellar/go/1.10.7
+MacBookPro:go mac$ go version
+go version go1.10.7 darwin/amd64
+ 
+# 切换版本并查看 切换到go 1.8.7
+MacBookPro:go mac$ brew switch go 1.8.7
+Cleaning /usr/local/Cellar/go/1.9.7
+Cleaning /usr/local/Cellar/go/1.10.3
+Cleaning /usr/local/Cellar/go/1.11.2
+Cleaning /usr/local/Cellar/go/1.11.4
+Cleaning /usr/local/Cellar/go/1.10.7
+Cleaning /usr/local/Cellar/go/1.8.7
+3 links created for /usr/local/Cellar/go/1.8.7
+MacBookPro:go mac$ go version
+go version go1.8.7 darwin/amd64
+```
+
+### 查看brew的帮助
+```
+brew –help
+```
+### 安装软件
+```
+brew install git
+```
+### 卸载软件
+```
+brew uninstall git
+```
+### 搜索软件
+```
+brew search git
+```
+### 显示已经安装软件列表
+```
+brew list
+```
+### 更新软件，把所有的Formula目录更新，并且会对本机已经安装并有更新的软件用*标明。
+```
+brew update
+```
+### 更新某具体软件
+```
+brew upgrade git
+```
+### 显示软件内容信息
+```
+brew info git
+```
+### 用浏览器打开
+```
+brew home
+```
+### 显示包依赖
+```
+brew deps 
+```
+### 显示包的依赖树
+```
+brew deps --installed --tree
+```
+### 启动web服务器，可以通过浏览器访问http://localhost:4567/ 来同网页来管理包
+```
+brew server
+```
+### 删除程序，和upgrade一样，单个软件删除和所有程序老版删除。
+```
+brew cleanup git 
+brew cleanup
+```
+### 查看那些已安装的程序需要更新
+```
+brew outdated
+```
 
 ## 查看端口占用
 
