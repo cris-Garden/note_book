@@ -1,4 +1,5 @@
 
+- [SHELL语法](#shell语法)
 - [MarkDown入门教学](#markdown入门教学)
 - [Mac](#mac)
 - [dart](#dart)
@@ -19,6 +20,10 @@
 - [广告联盟](#广告联盟)
 - [google AI](#google-ai)
 - [Linux](#linux)
+
+# SHELL语法
+
+[SHELL语法tips](/linux/shell语法.md)
 
 # MarkDown入门教学
 [MarkDown中文文档](http://xianbai.me/learn-md/article/syntax/blockquotes.html)
@@ -112,6 +117,10 @@
 [如何分离第三方包配置文件和jar包](springboot/jar包和配置文件第三方包分离.md)
 
 [SpringBoot - 配置文件application.yml使用详解](springboot/springsetting.md)
+
+[SpringBoot - url传参数](springboot/url传参数.md)
+
+[SpringBoot - mybatic配置](springboot/配置mybatic.md)
 
 # 广告联盟
 

@@ -10,6 +10,7 @@
   - [It is currently in use by another Gradle instance](#it-is-currently-in-use-by-another-gradle-instance)
   - [5.0 版本 gradle wrapper报错](#50-版本-gradle-wrapper报错)
   - [mac 关闭指定端口](#mac-关闭指定端口)
+  - [编译失败打印失败原因](#编译失败打印失败原因)
 
 
 
@@ -506,4 +507,9 @@ java    5657 chris   47u  IPv6 0xdfeaafaf9a34b175      0t0  TCP *:http-alt (LIST
 杀死进程
 ```
 kill -9 5657
+```
+
+## 编译失败打印失败原因
+```
+./gradlew bootRun --warning-mode all
 ```

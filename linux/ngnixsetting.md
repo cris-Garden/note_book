@@ -7,7 +7,7 @@
 
 nginx的配置放在nginx.conf文件中，一般我们可以使用以下命令查看服务器中存在的nginx.conf文件。
 
-```S
+```
 locate nginx.conf
 /usr/local/etc/nginx/nginx.conf
 /usr/local/etc/nginx/nginx.conf.default
