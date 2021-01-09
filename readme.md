@@ -37,7 +37,7 @@
 [dart构造函数详解](./dart/dart构造函数.md)
 # flutter
 
-[flutter知识点整理]()
+[flutter的Thema详解](./flutter/thema.md)
 
 [flutter笔记大集合](./flutter/flutter.md)
 
@@ -65,6 +65,10 @@
 [python爬虫](python/爬虫.md)
 
 [python 常用函数和功能](python/pythondocument.md)
+
+[廖雪峰教程实战总结](python/blog.md)
+
+[yield和yieldfrom的区别何作用](python/yieldfrom.md)
 
 # Mysql
 

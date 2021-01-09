@@ -69,6 +69,8 @@
     - [编辑开始和结束的通知](#编辑开始和结束的通知)
     - [多个输入框之间的切换](#多个输入框之间的切换)
     - [使用decoration美化输入框](#使用decoration美化输入框)
+      - [删除输入框默认的下划线](#删除输入框默认的下划线)
+      - [TextField不弹出键盘原因](#textfield不弹出键盘原因)
     - [点击结束输入编辑状态](#点击结束输入编辑状态)
   - [TextEditingController](#texteditingcontroller)
   - [InputDecoration](#inputdecoration)
@@ -348,9 +350,6 @@ var date = new DateTime.now();
     );
     if (dateTime != null && dateTime != initialDate) {}
   }
-————————————————
-版权声明：本文为CSDN博主「早起的年轻人」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/zl18603543572/article/details/94614825
 ```
 
 ### 选择时分秒
@@ -375,9 +374,6 @@ var date = new DateTime.now();
       });
     }
   }
-————————————————
-版权声明：本文为CSDN博主「早起的年轻人」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/zl18603543572/article/details/94614825
 ```
 
 
@@ -1308,7 +1304,23 @@ suffixIcon: 输入框内侧右面的图标.
 icon : 输入框左侧添加个图标
 helperText:输入框正下方的文字,
 ```
+#### 删除输入框默认的下划线
 
+border: InputBorder.none,
+
+```dart
+TextField(
+      autofocus: true,
+      decoration: InputDecoration.collapsed(
+        hintText: "Search",
+        border: InputBorder.none,
+      ),
+      maxLines: 1,
+    )
+```
+
+#### TextField不弹出键盘原因
+如果使用TextEditingController会引起键盘不弹出来，你必须给每一个输入框配置不同的TextEditingController
 
 
 ### 点击结束输入编辑状态
