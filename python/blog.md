@@ -513,7 +513,7 @@ $ mysql -u root -p < schema.sql
 
 最终产生文件如下
 
-orm.py(注意这里没有使用协程来实现)
+orm.py(注意这里没有使用协程来实现,这个写法是同步异步写法和上面的day3不一样，day3写法后续测试)
 ```python
 #!/usr/bin/env python3
 
