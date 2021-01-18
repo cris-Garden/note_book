@@ -18,6 +18,13 @@
   - [MP4抽取MP3](#mp4抽取mp3)
 - [字符串操作](#字符串操作)
   - [字符串前补零](#字符串前补零)
+- [时间和时间戳的相互转换](#时间和时间戳的相互转换)
+  - [将时间转换成时间戳](#将时间转换成时间戳)
+  - [重新格式化时间](#重新格式化时间)
+  - [将时间戳转换成时间](#将时间戳转换成时间)
+  - [按指定的格式获取当前时间](#按指定的格式获取当前时间)
+  - [计算两个日期之间天数](#计算两个日期之间天数)
+- [向上取整，向下取整，四舍五入取整](#向上取整向下取整四舍五入取整)
 
 
 
@@ -256,6 +263,140 @@ n = 123
 s = "%05d" % n
 assert s == "00123"
 ```
+# 时间和时间戳的相互转换
 
+## 将时间转换成时间戳
 
+将如上的时间2016-05-05 20:28:54转换成时间戳，具体的操作过程为：
 
+利用strptime()函数将时间转换成时间数组
+利用mktime()函数将时间数组转换成时间戳
+```python
+#coding:UTF-8
+import time
+
+dt = "2016-05-05 20:28:54"
+
+#转换成时间数组
+timeArray = time.strptime(dt, "%Y-%m-%d %H:%M:%S")
+#转换成时间戳
+timestamp = time.mktime(timeArray)
+
+print timestamp
+```
+
+## 重新格式化时间
+
+重新格式化时间需要以下的两个步骤：
+
+利用strptime()函数将时间转换成时间数组
+利用strftime()函数重新格式化时间
+```python
+#coding:UTF-8
+import time
+
+dt = "2016-05-05 20:28:54"
+
+#转换成时间数组
+timeArray = time.strptime(dt, "%Y-%m-%d %H:%M:%S")
+#转换成新的时间格式(20160505-20:28:54)
+dt_new = time.strftime("%Y%m%d-%H:%M:%S",timeArray)
+
+print dt_new
+```
+
+## 将时间戳转换成时间
+
+在时间戳转换成时间中，首先需要将时间戳转换成localtime，再转换成时间的具体格式：
+
+利用localtime()函数将时间戳转化成localtime的格式
+利用strftime()函数重新格式化时间
+```python
+#coding:UTF-8
+import time
+
+timestamp = 1462451334
+
+#转换成localtime
+time_local = time.localtime(timestamp)
+#转换成新的时间格式(2016-05-05 20:28:54)
+dt = time.strftime("%Y-%m-%d %H:%M:%S",time_local)
+
+print dt
+```
+## 按指定的格式获取当前时间
+
+利用time()获取当前时间，再利用localtime()函数转换为localtime，最后利用strftime()函数重新格式化时间。
+
+```python
+#coding:UTF-8
+import time
+
+#获取当前时间
+time_now = int(time.time())
+#转换成localtime
+time_local = time.localtime(time_now)
+#转换成新的时间格式(2016-05-09 18:59:20)
+dt = time.strftime("%Y-%m-%d %H:%M:%S",time_local)
+
+print dt
+```
+
+## 计算两个日期之间天数
+
+```python
+>>> import datetime
+>>> d1 = datetime.datetime(2018,10,31)   # 第一个日期
+>>> d2 = datetime.datetime(2019,02,02)   # 第二个日期
+>>> interval = d2 - d1                   # 两日期差距
+>>> interval.days                        # 具体的天数                     
+94
+>>> interval.seconds                     # 具体的秒数
+0
+```
+
+如果是两个日期还是带时，分，秒的话，同样可以算出两者的相距天数及秒数.
+```python
+
+>>> import datetime
+>>> d1 = datetime.datetime(2018,10,31,10,30,00)
+>>> d2 = datetime.datetime(2018,11,01,10,40,30)
+>>> interval = d2 - d1
+>>> interval                   # 第一项是天数，相距1天
+datetime.timedelta(1, 630)
+>>> interval.days              # 具体天数
+1
+>>> interval.seconds           # 额外秒数
+630
+>>> interval.total_seconds()   # 相差总秒数  
+87030.0
+
+```
+
+# 向上取整，向下取整，四舍五入取整
+```python
+#encoding:utf-8
+import math
+
+#向上取整
+print "math.ceil---"
+print "math.ceil(2.3) => ", math.ceil(2.3)
+print "math.ceil(2.6) => ", math.ceil(2.6)
+
+#向下取整
+print "\nmath.floor---"
+print "math.floor(2.3) => ", math.floor(2.3)
+print "math.floor(2.6) => ", math.floor(2.6)
+
+#四舍五入
+print "\nround---"
+print "round(2.3) => ", round(2.3)
+print "round(2.6) => ", round(2.6)
+
+#这三个的返回结果都是浮点型
+print "\n\nNOTE:every result is type of float"
+print "math.ceil(2) => ", math.ceil(2)
+print "math.floor(2) => ", math.floor(2)
+print "round(2) => ", round(2)
+
+```
