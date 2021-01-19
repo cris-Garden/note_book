@@ -128,6 +128,12 @@
 
 [SpringBoot - mybatic配置](springboot/配置mybatic.md)
 
+[springBoot - 配置OpenApi](springboot/配置openApi.md)
+
+[springboot - 静态资源文件路径的配置](springboot/springboot配置静态资源文件.md)
+
+[springboot - mybatic一对多](springboot/mybatis一对多开发.md)
+
 # 广告联盟
 
 [广告配置](ad/admod.md)
