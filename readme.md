@@ -20,6 +20,7 @@
 - [广告联盟](#广告联盟)
 - [google AI](#google-ai)
 - [Linux](#linux)
+- [错误集合](#错误集合)
 
 # SHELL语法
 
@@ -42,6 +43,22 @@
 [flutter笔记大集合](./flutter/flutter.md)
 
 [flutter创建自己的第三方库](./flutter/自定义第三方库.md)
+
+[flutter命令行](./flutter/commond.md)
+
+[flutter四种工程类型](./)
+
+[底部导航栏NavigationBar的几种实践](./flutter/Flutter底部导航栏NavigationBar的几种实践.md)
+
+[单元测试的流程](./flutter/单元测试.md)
+
+[flutter几种路由详解](flutter/Flutter底部导航栏NavigationBar的几种实践.md)
+
+[自定义键盘](flutter/第三方库自定义键盘.md)
+
+[自定义键盘第三方库](flutter/第三方库自定义键盘.md)
+
+[路由与导航](flutter/路由和导航.md)
 
 
 # 版本管理
@@ -138,8 +155,6 @@
 
 [广告配置](ad/admod.md)
 
-[admod添加顺序](admod.md)
-
 
 # google AI
 
@@ -153,3 +168,7 @@
 [centos安装java环境](linux/centos.md)
 
 [nginx](linux/ngnixsetting.md)
+
+
+# [错误集合](errorNote.md)
+

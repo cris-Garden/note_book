@@ -1,3 +1,4 @@
+- [创建Admod app的顺序](#创建admod-app的顺序)
 - [Android Google AdMob 广告接入示例](#android-google-admob-广告接入示例)
   - [什么是 AdMob ?](#什么是-admob-)
   - [AdMob 广告的类型 ？](#admob-广告的类型-)
@@ -9,6 +10,26 @@
     - [2-5. xml 布局编写](#2-5-xml-布局编写)
     - [2-6. Activity 加载 Banner 广告](#2-6-activity-加载-banner-广告)
     - [2-7. Google AdMob Demo 地址](#2-7-google-admob-demo-地址)
+
+
+# 创建Admod app的顺序
+* 在admod后台创建app，生成appid
+
+* 创建广告单元，生成广告id
+
+* firebase创建app。如：iOS
+
+* 绑定identiferid
+
+* 下载 GoogleService-Info.plist和info.plist一个文件
+* 在info.plist配置appid
+
+```
+<key>GADApplicationIdentifier</key>
+<string>ca-app-pub-9899963092044978~8886647952</string>
+```
+
+
 
 # Android Google AdMob 广告接入示例
 
