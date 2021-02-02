@@ -6,6 +6,8 @@
 	- [unexpected duplicate task: CopyPlistFile](#unexpected-duplicate-task-copyplistfile)
 	- [App.framework does not support the minimum OS Version specified in the Info.plist](#appframework-does-not-support-the-minimum-os-version-specified-in-the-infoplist)
 	- [Flutter 修改版本号不生效](#flutter-修改版本号不生效)
+- [How to resolve Error: Not found: ‘package:](#how-to-resolve-error-not-found-package)
+	- [Target of URI doesn't exist 'package:flutter/material.dart'](#target-of-uri-doesnt-exist-packagefluttermaterialdart)
 
 # 安卓
 
@@ -84,3 +86,53 @@ Flutter的App版本号设置在pubspec.yaml中，+号前面是版本名称，后
 现在重新build 安装就能生效了
 
 version: 1.0.0+1
+
+先检查引用包是否放在 dependencies：下面
+
+而不是dev_dependencies：
+
+```
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  firebase_admob: ^0.9.3+4
+  xpath: ^0.1.0
+  loading_dialog: ^0.0.1
+  package_info: ^0.4.3
+  sqflite: ^1.1.7
+  path_provider: ^1.4.0
+  shared_preferences: ^0.5.8
+  provider: ^4.1.2
+
+```
+
+
+# How to resolve Error: Not found: ‘package:
+first run
+```sh
+flutter clean
+
+```
+if it does not work,you need to run
+```
+flutter pub cache repair
+
+```
+https://github.com/flutter/flutter/issues/17565
+
+## Target of URI doesn't exist 'package:flutter/material.dart'
+
+If you have used the 
+```
+flutter packages get
+``` 
+command and the error still persists, you can simply reload VS code the 
+```
+Developer: Reload Window command.
+```
+ Simply type that in after pressing Ctrl+Shift+P (Cmd+Shift+P for Mac users). It will clear the error. It's like refreshing VS Code.
